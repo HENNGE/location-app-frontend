@@ -1,8 +1,10 @@
 import { AppShell, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NavbarButtons from './components/NavbarButtons';
+import FourthFloorPage from './pages/FourthFloorPage';
 
 const App = (): JSX.Element => {
     const [opened, { toggle }] = useDisclosure();
@@ -27,13 +29,28 @@ const App = (): JSX.Element => {
                 </AppShell.Navbar>
                 <AppShell.Main>
                     <Container fluid className=''>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nu
+                        <BrowserRouter>
+                            <Routes>
+                                {/* <Route path='*' element={<ErrorPage />} /> */}
+                                <Route path='/' element={<div>Home</div>} />
+                                <Route
+                                    path='/level-2'
+                                    element={<div>2F</div>}
+                                />
+                                <Route
+                                    path='/level-4'
+                                    element={<FourthFloorPage />}
+                                />
+                                <Route
+                                    path='/level-5'
+                                    element={<div>5F</div>}
+                                />
+                                <Route
+                                    path='/level-11'
+                                    element={<div>11F</div>}
+                                />
+                            </Routes>
+                        </BrowserRouter>
                     </Container>
                 </AppShell.Main>
             </AppShell>

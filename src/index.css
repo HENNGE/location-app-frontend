@@ -33,4 +33,9 @@
       background-color: #ffffff;
     }
   }
-  
+
+#img-mapper {
+  /* position: relative; */
+  width: 90vw !important;
+  height: auto !important;
+}
