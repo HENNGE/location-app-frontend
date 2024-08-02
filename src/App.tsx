@@ -7,6 +7,7 @@ import NavbarButtons from './components/NavbarButtons';
 import EleventhFloorPage from './pages/EleventhFloorPage';
 import FifthFloorPage from './pages/FifthFloorPage';
 import FourthFloorPage from './pages/FourthFloorPage';
+import HomePage from './pages/HomePage';
 import SecondFloorPage from './pages/SecondFloorPage';
 
 const App = (): JSX.Element => {
@@ -35,7 +36,7 @@ const App = (): JSX.Element => {
                         <BrowserRouter>
                             <Routes>
                                 {/* <Route path='*' element={<ErrorPage />} /> */}
-                                <Route path='/' element={<div>Home</div>} />
+                                <Route path='/' element={<HomePage />} />
                                 <Route
                                     path='/level-2'
                                     element={<SecondFloorPage />}

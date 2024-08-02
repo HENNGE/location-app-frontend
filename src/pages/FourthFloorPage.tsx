@@ -8,7 +8,7 @@ const FourthFloorPage = (): JSX.Element => {
                 draggable='false'
                 className='block relative h-[80%] w-[90%]'
             />
-            <section className='absolute h-full w-full'>
+            <section className='absolute h-full w-full border border-red-500'>
                 <section id='inner-lounge'>
                     <div
                         data-note='wifi-ap-1'
