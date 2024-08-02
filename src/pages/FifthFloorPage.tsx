@@ -1,16 +1,16 @@
-import SecondFloorMap from '../assets/2F-map.png';
+import FifthFloorMap from '../assets/5F-map.png';
 
-const SecondFloorPage = (): JSX.Element => {
+const FourthFloorPage = (): JSX.Element => {
     return (
         <div className='flex justify-center items-center'>
             <img
-                src={SecondFloorMap}
+                src={FifthFloorMap}
                 draggable='false'
-                className='block relative h-auto w-[80%]'
+                className='block relative h-auto w-[75%]'
             />
             <section className='absolute h-full w-full'></section>
         </div>
     );
 };
 
-export default SecondFloorPage;
+export default FourthFloorPage;

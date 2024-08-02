@@ -56,55 +56,55 @@ const FourthFloorPage = (): JSX.Element => {
                 <section id='forest-area'>
                     <div
                         data-note='forest-wifi-ap-1'
-                        className='absolute bg-red-500 rounded opacity-50 left-[10.5%] top-[22%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-white rounded opacity-0 left-[9.4%] top-[21%] w-[8.6%] h-[17.7%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
-                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
+                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-gray-200 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-2'
-                        className='absolute bg-red-500 rounded opacity-50 left-[20.9%] top-[22%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[20%] top-[21%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-3'
-                        className='absolute bg-red-500 rounded opacity-50 left-[31.2%] top-[22%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[30.5%] top-[21%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-4'
-                        className='absolute bg-red-500 rounded opacity-50 left-[10.5%] top-[43%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-white rounded opacity-0 left-[9.4%] top-[42.5%] w-[8.6%] h-[17.7%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
-                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
+                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-gray-200 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-5'
-                        className='absolute bg-red-500 rounded opacity-50 left-[20.9%] top-[43%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-white rounded opacity-0 left-[20%] top-[42.5%] w-[8.6%] h-[17.7%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
-                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
+                        <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-gray-200 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-6'
-                        className='absolute bg-red-500 rounded opacity-50 left-[31.2%] top-[43%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[30.5%] top-[42.5%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-7'
-                        className='absolute bg-red-500 rounded opacity-50 left-[10.5%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[9.4%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-8'
-                        className='absolute bg-red-500 rounded opacity-50 left-[20.9%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[20%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>
                     <div
                         data-note='forest-wifi-ap-9'
-                        className='absolute bg-red-500 rounded opacity-50 left-[31.2%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
+                        className='absolute bg-red-500 rounded opacity-50 left-[30.5%] top-[64%] w-[8.6%] h-[17.7%] hover:opacity-90 hover:scale-100 transition-all flex justify-center items-center [&>span]:hover:animate-ping [&>span]:hover:opacity-100'
                     >
                         <span className='animate-none absolute inline-flex h-[50%] w-[50%] rounded bg-red-400 opacity-0' />
                     </div>

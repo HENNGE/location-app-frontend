@@ -4,6 +4,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NavbarButtons from './components/NavbarButtons';
+import EleventhFloorPage from './pages/EleventhFloorPage';
+import FifthFloorPage from './pages/FifthFloorPage';
 import FourthFloorPage from './pages/FourthFloorPage';
 import SecondFloorPage from './pages/SecondFloorPage';
 
@@ -44,11 +46,11 @@ const App = (): JSX.Element => {
                                 />
                                 <Route
                                     path='/level-5'
-                                    element={<div>5F</div>}
+                                    element={<FifthFloorPage />}
                                 />
                                 <Route
                                     path='/level-11'
-                                    element={<div>11F</div>}
+                                    element={<EleventhFloorPage />}
                                 />
                             </Routes>
                         </BrowserRouter>
