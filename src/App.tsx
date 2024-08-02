@@ -5,13 +5,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NavbarButtons from './components/NavbarButtons';
 import FourthFloorPage from './pages/FourthFloorPage';
+import SecondFloorPage from './pages/SecondFloorPage';
 
 const App = (): JSX.Element => {
     const [opened, { toggle }] = useDisclosure();
 
     return (
         <MantineProvider
-            defaultColorScheme='auto'
+            defaultColorScheme='light'
             theme={{ fontFamily: 'Poppins, sans-serif' }}
         >
             <AppShell
@@ -35,7 +36,7 @@ const App = (): JSX.Element => {
                                 <Route path='/' element={<div>Home</div>} />
                                 <Route
                                     path='/level-2'
-                                    element={<div>2F</div>}
+                                    element={<SecondFloorPage />}
                                 />
                                 <Route
                                     path='/level-4'
