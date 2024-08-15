@@ -13,7 +13,7 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
     const displayLevel = useCallback(() => {
         switch (path) {
             case '/':
-                return 'Home';
+                return '2F';
             case '/level-2':
                 return '2F';
             case '/level-4':
@@ -46,6 +46,13 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
                             {displayLevel()}
                         </Text>
                     </div>
+
+                    {/* <Group>
+                        <Autocomplete
+                            placeholder='Search for a user ...'
+                            className='w-[30rem]'
+                        />
+                    </Group> */}
 
                     <Group ml='xl' gap={0} visibleFrom='sm'>
                         <NavbarButtons />

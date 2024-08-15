@@ -1,7 +1,7 @@
 import { AppShell, Container, Loader, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useSWR from 'swr';
 import Header from './components/Header';
 import NavbarButtons from './components/NavbarButtons';
@@ -9,7 +9,6 @@ import EleventhFloorPage from './pages/EleventhFloorPage';
 import ErrorPage from './pages/ErrorPage';
 import FifthFloorPage from './pages/FifthFloorPage';
 import FourthFloorPage from './pages/FourthFloorPage';
-import HomePage from './pages/HomePage';
 import SecondFloorPage from './pages/SecondFloorPage';
 import { FetchedCasvalData } from './types/casval.types';
 import { fetcher } from './utilities/utilities';
@@ -51,7 +50,10 @@ const App = (): JSX.Element => {
                             {data && (
                                 <Routes>
                                     <Route path='*' element={<ErrorPage />} />
-                                    <Route path='/' element={<HomePage />} />
+                                    <Route
+                                        path='/'
+                                        element={<Navigate to='/level-2' />}
+                                    />
                                     <Route
                                         path='/level-2'
                                         element={<SecondFloorPage />}

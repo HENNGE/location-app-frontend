@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { Drawer } from '@mantine/core';
+import { useMemo, useState } from 'react';
 import FourthFloorMap from '../assets/4F-map.png';
-import WifiHoverComponent from '../components/WifiHoverComponent';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const FourthFloorPage = ({ data }: Props): JSX.Element => {
+    const [open, setOpen] = useState('');
     const filteredData = useMemo(() => {
         const output: {
             [key: string]: {
@@ -93,148 +94,146 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
 
         return output;
     }, [data]);
-    console.log(filteredData);
+
     return (
         <div className='flex justify-center items-center'>
-            <img
-                src={FourthFloorMap}
-                draggable='false'
-                className='block relative h-[80%] w-[90%]'
-            />
-            <section className='absolute h-full w-full border'>
-                {/* <section id='inner-lounge' className='border border-red-500'>
-                    <WifiHoverComponent
-                        name='4F (Lounge - 1)'
-                        left={47}
-                        top={41}
-                        width={13}
-                        height={17}
-                        data={filteredData['4F (Lounge - 1)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lounge - 2)'
-                        left={60.5}
-                        top={41}
-                        width={13}
-                        height={17}
-                        data={filteredData['4F (Lounge - 2)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lounge - 3)'
-                        left={74}
-                        top={41}
-                        width={13}
-                        height={17}
-                        data={filteredData['4F (Lounge - 3)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lounge - 4)'
-                        left={47}
-                        top={59}
-                        width={13}
-                        height={15.3}
-                        data={filteredData['4F (Lounge - 4)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lounge - 5)'
-                        left={60.5}
-                        top={59}
-                        width={13}
-                        height={15.3}
-                        data={filteredData['4F (Lounge - 5)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lounge - 6)'
-                        left={74}
-                        top={59}
-                        width={13}
-                        height={15.3}
-                        data={filteredData['4F (Lounge - 6)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Lab - 1)'
-                        left={65}
-                        top={77.1}
-                        width={16}
-                        height={10.7}
-                        data={filteredData['4F (Lab - 1)']}
-                    />
-                </section> */}
-                <section id='forest-area'>
-                    <WifiHoverComponent
-                        name='4F (Forest - 1)'
-                        left={9.4}
-                        top={21}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 1)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 2)'
-                        left={20}
-                        top={21}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 2)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 3)'
-                        left={30.5}
-                        top={21}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 3)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 4)'
-                        left={9.4}
-                        top={42.5}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 4)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 5)'
-                        left={20}
-                        top={42.5}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 5)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 6)'
-                        left={30.5}
-                        top={42.5}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 6)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 7)'
-                        left={9.4}
-                        top={64}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 7)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 8)'
-                        left={20}
-                        top={64}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 8)']}
-                    />
-                    <WifiHoverComponent
-                        name='4F (Forest - 9)'
-                        left={30.5}
-                        top={64}
-                        width={8.6}
-                        height={17.7}
-                        data={filteredData['4F (Forest - 9)']}
-                    />
+            <div className='relative z-0 h-[80%] w-[90%]'>
+                <img
+                    src={FourthFloorMap}
+                    draggable='false'
+                    className='z-10 h-full w-full'
+                />
+                <div id='overlay' className='absolute top-0 z-20 w-full h-full'>
+                    <section id='inner-lounge'>
+                        <Drawer
+                            opened={!!open}
+                            onClose={() => setOpen('')}
+                            offset={8}
+                            radius='md'
+                            size='xs'
+                        >
+                            <div className='h-full w-[20rem] overflow-y-auto'>
+                                {filteredData['4F (Lounge - 1)'].map((user) => (
+                                    <div className='w-full'>
+                                        {user.user.email}
+                                    </div>
+                                ))}
+                            </div>
+                        </Drawer>
+                        <div
+                            onClick={() => setOpen('4F (Lounge - 1)')}
+                            data-note='4F (Lounge - 1)'
+                            className='absolute left-[46.7%] top-[38.5%] w-[15%] h-[20.5%]'
+                            // className={`absolute bg-white rounded opacity-100 left-[46.7%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`${
+                                    open === '4F (Lounge - 1)'
+                                        ? 'animate-ping opacity-0'
+                                        : 'animate-none opacity-0'
+                                } absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            data-note='4F (Lounge - 2)'
+                            className={`absolute bg-white rounded opacity-100 left-[62%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Lounge - 3)'
+                            className={`absolute bg-white rounded opacity-100 left-[77.3%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Lounge - 4)'
+                            className={`absolute bg-white rounded opacity-100 left-[46.7%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Lounge - 5)'
+                            className={`absolute bg-white rounded opacity-100 left-[62%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Lounge - 6)'
+                            className={`absolute bg-white rounded opacity-100 left-[77.3%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Lab - 1)'
+                            className={`absolute bg-white rounded opacity-100 left-[67.7%] top-[84.3%] w-[17.7%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                    </section>
+                    <section id='forest-area'>
+                        <div
+                            data-note='4F (Forest - 1)'
+                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 2)'
+                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 3)'
+                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 4)'
+                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 5)'
+                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 6)'
+                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 7)'
+                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 8)'
+                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                        <div
+                            data-note='4F (Forest - 9)'
+                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
+                        </div>
+                    </section>
+                </div>
+            </div>
+            {/* <section className='absolute h-[80%] w-[90%]'>
+                <section>
+                    
                 </section>
-            </section>
+            </section> */}
         </div>
     );
 };

@@ -4,15 +4,6 @@ const NavbarButtons = (): JSX.Element => {
     const path = window.location.pathname;
     return (
         <>
-            <a href='/'>
-                <UnstyledButton
-                    className={`block px-4 py-1 rounded-md font-medium hover:bg-gray-100 ${
-                        path === '/' && 'underline'
-                    }`}
-                >
-                    Home
-                </UnstyledButton>
-            </a>
             <a href='/level-2'>
                 <UnstyledButton
                     className={`block px-4 py-1 rounded-md font-medium hover:bg-gray-100 ${
