@@ -123,8 +123,7 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                         <div
                             onClick={() => setOpen('4F (Lounge - 1)')}
                             data-note='4F (Lounge - 1)'
-                            className='absolute left-[46.7%] top-[38.5%] w-[15%] h-[20.5%]'
-                            // className={`absolute bg-white rounded opacity-100 left-[46.7%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-10 left-[46.7%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`${
@@ -136,37 +135,37 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                         </div>
                         <div
                             data-note='4F (Lounge - 2)'
-                            className={`absolute bg-white rounded opacity-100 left-[62%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[62%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Lounge - 3)'
-                            className={`absolute bg-white rounded opacity-100 left-[77.3%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[77.3%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Lounge - 4)'
-                            className={`absolute bg-white rounded opacity-100 left-[46.7%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[46.7%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Lounge - 5)'
-                            className={`absolute bg-white rounded opacity-100 left-[62%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[62%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Lounge - 6)'
-                            className={`absolute bg-white rounded opacity-100 left-[77.3%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[77.3%] top-[59.7%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Lab - 1)'
-                            className={`absolute bg-white rounded opacity-100 left-[67.7%] top-[84.3%] w-[17.7%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[67.7%] top-[84.3%] w-[17.7%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
@@ -174,66 +173,61 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                     <section id='forest-area'>
                         <div
                             data-note='4F (Forest - 1)'
-                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[2.9%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 2)'
-                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[15.2%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 3)'
-                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[27.5%] top-[13.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 4)'
-                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[2.9%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 5)'
-                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[15.2%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 6)'
-                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[27.5%] top-[40.5%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 7)'
-                            className={`absolute bg-white rounded opacity-100 left-[2.9%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[2.9%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 8)'
-                            className={`absolute bg-white rounded opacity-100 left-[15.2%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[15.2%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                         <div
                             data-note='4F (Forest - 9)'
-                            className={`absolute bg-white rounded opacity-100 left-[27.5%] top-[67.7%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            className={`absolute bg-white rounded opacity-0 left-[27.5%] top-[64%] w-[9.9%] h-[22.2%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span className='animate-none absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 opacity-0 hover:animate-ping hover:opacity-100' />
                         </div>
                     </section>
                 </div>
             </div>
-            {/* <section className='absolute h-[80%] w-[90%]'>
-                <section>
-                    
-                </section>
-            </section> */}
         </div>
     );
 };
