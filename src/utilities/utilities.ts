@@ -10,3 +10,22 @@ export const fetcher = async (endpoint: string) => {
 
     return response.data;
 };
+
+export const kasvotFetcher = async (query: string) => {
+    const url = `${import.meta.env.VITE_KASVOT_URL}`;
+
+    const response = await axios.post(
+        url,
+        {
+            query,
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': import.meta.env.VITE_KASVOT_API_KEY,
+            },
+        }
+    );
+
+    return response.data;
+};

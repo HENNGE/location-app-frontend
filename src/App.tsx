@@ -68,7 +68,11 @@ const App = (): JSX.Element => {
                                     />
                                     <Route
                                         path='/level-5'
-                                        element={<FifthFloorPage />}
+                                        element={
+                                            <FifthFloorPage
+                                                data={data.fifthFloor}
+                                            />
+                                        }
                                     />
                                     <Route
                                         path='/level-11'
