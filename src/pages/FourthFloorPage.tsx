@@ -98,7 +98,18 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
 
     return (
         <div className='flex justify-center items-center'>
-            <div className='relative z-0 h-[80%] w-[90%]'>
+            <Drawer
+                opened={!!open}
+                onClose={() => setOpen('')}
+                position={open.includes('Forest') ? 'right' : 'left'}
+                offset={8}
+                radius='md'
+                size='xs'
+                title={open}
+            >
+                <DrawerContainer data={filteredData[open] || []} />
+            </Drawer>
+            <div className='relative z-0 h-[80%] w-[85%]'>
                 <img
                     src={FourthFloorMap}
                     draggable='false'
@@ -106,19 +117,6 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                 />
                 <div id='overlay' className='absolute top-0 z-20 w-full h-full'>
                     <section id='inner-lounge'>
-                        <Drawer
-                            opened={!!open}
-                            onClose={() => setOpen('')}
-                            position={
-                                open.includes('Forest') ? 'right' : 'left'
-                            }
-                            offset={8}
-                            radius='md'
-                            size='xs'
-                            title={open}
-                        >
-                            <DrawerContainer data={filteredData[open] || []} />
-                        </Drawer>
                         <div
                             onClick={() => setOpen('4F (Lounge - 1)')}
                             data-note='4F (Lounge - 1)'

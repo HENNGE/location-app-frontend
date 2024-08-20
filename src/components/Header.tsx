@@ -40,7 +40,7 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
                             order={1}
                             className={`text-2xl font-bold md:text-3xl lg:text-4xl ml-1 md:ml-4`}
                         >
-                            Location App
+                            HENNGE Location
                         </Title>
                         <Text className='ml-4' c='dimmed' size='lg'>
                             {displayLevel()}

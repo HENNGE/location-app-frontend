@@ -76,7 +76,7 @@ const DrawerContainer = ({ data }: Props): JSX.Element => {
                         >
                             <img
                                 src={user.kasvotData.imgUrl}
-                                className='h-14 w-auto rounded-full'
+                                className='h-[4rem] w-[3rem] object-cover rounded-full'
                             />
                             <div>
                                 <Text>{user.kasvotData.name}</Text>
