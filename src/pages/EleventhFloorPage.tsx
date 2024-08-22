@@ -1,8 +1,9 @@
 import { Drawer } from '@mantine/core';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import EleventhFloorMap from '../assets/11F-map.png';
 import DrawerContainer from '../components/DrawerContainer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import useFilteredData from '../utilities/hooks';
 
 interface Props {
     data: {
@@ -12,44 +13,8 @@ interface Props {
 }
 
 const EleventhFloorPage = ({ data }: Props): JSX.Element => {
-    console.log(data);
     const [open, setOpen] = useState('');
-    const filteredData = useMemo(() => {
-        const output: {
-            [key: string]: {
-                user: CasvalUser;
-                userLocation: CasvalUserLocation;
-            }[];
-        } = {
-            '11F (Blue)': [],
-            '11F (Meeting Area - Near Center)': [],
-            '11F (Meeting Area - Near North Door)': [],
-            '11F (Lounge)': [],
-            '11F (Lounge - Near South Door)': [],
-        };
-
-        data.forEach((user) => {
-            switch (user.userLocation.name) {
-                case '11F (Blue)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '11F (Meeting Area - Near Center)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '11F (Meeting Area - Near North Door)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '11F (Lounge)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '11F (Lounge - Near South Door)':
-                    output[user.userLocation.name].push(user);
-                    return;
-            }
-        });
-
-        return output;
-    }, [data]);
+    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>

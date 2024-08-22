@@ -1,8 +1,9 @@
 import { Drawer } from '@mantine/core';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import FifthFloorMap from '../assets/5F-map.png';
 import DrawerContainer from '../components/DrawerContainer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import useFilteredData from '../utilities/hooks';
 
 interface Props {
     data: {
@@ -13,46 +14,7 @@ interface Props {
 
 const FifthFloorPage = ({ data }: Props): JSX.Element => {
     const [open, setOpen] = useState('');
-    const filteredData = useMemo(() => {
-        const output: {
-            [key: string]: {
-                user: CasvalUser;
-                userLocation: CasvalUserLocation;
-            }[];
-        } = {
-            '5F (South - 1)': [],
-            '5F (South - 2)': [],
-            '5F (Meeting Rooms)': [],
-            '5F (NorthWest)': [],
-            '5F (North)': [],
-            '5F (NorthEast)': [],
-        };
-
-        data.forEach((user) => {
-            switch (user.userLocation.name) {
-                case '5F (South - 1)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '5F (South - 2)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '5F (Meeting Rooms)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '5F (NorthWest)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '5F (North)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '5F (NorthEast)':
-                    output[user.userLocation.name].push(user);
-                    return;
-            }
-        });
-
-        return output;
-    }, [data]);
+    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>

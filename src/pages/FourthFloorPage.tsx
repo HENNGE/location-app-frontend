@@ -1,8 +1,9 @@
 import { Drawer, Text } from '@mantine/core';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import FourthFloorMap from '../assets/4F-map.png';
 import DrawerContainer from '../components/DrawerContainer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import useFilteredData from '../utilities/hooks';
 
 interface Props {
     data: {
@@ -13,88 +14,7 @@ interface Props {
 
 const FourthFloorPage = ({ data }: Props): JSX.Element => {
     const [open, setOpen] = useState('');
-    const filteredData = useMemo(() => {
-        const output: {
-            [key: string]: {
-                user: CasvalUser;
-                userLocation: CasvalUserLocation;
-            }[];
-        } = {
-            '4F (Lounge - 1)': [],
-            '4F (Lounge - 2)': [],
-            '4F (Lounge - 3)': [],
-            '4F (Lounge - 4)': [],
-            '4F (Lounge - 5)': [],
-            '4F (Lounge - 6)': [],
-
-            '4F (Lab - 1)': [],
-
-            '4F (Forest - 1)': [],
-            '4F (Forest - 2)': [],
-            '4F (Forest - 3)': [],
-            '4F (Forest - 4)': [],
-            '4F (Forest - 5)': [],
-            '4F (Forest - 6)': [],
-            '4F (Forest - 7)': [],
-            '4F (Forest - 8)': [],
-            '4F (Forest - 9)': [],
-        };
-
-        data.forEach((user) => {
-            switch (user.userLocation.name) {
-                case '4F (Lounge - 1)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lounge - 2)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lounge - 3':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lounge - 4)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lounge - 5)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lounge - 6)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Lab - 1)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 1)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 2)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 3)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 4)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 5)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 6)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 7)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 8)':
-                    output[user.userLocation.name].push(user);
-                    return;
-                case '4F (Forest - 9)':
-                    output[user.userLocation.name].push(user);
-                    return;
-            }
-        });
-
-        return output;
-    }, [data]);
+    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>
