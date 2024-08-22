@@ -1,4 +1,3 @@
-import { Drawer } from '@mantine/core';
 import { useState } from 'react';
 import SecondFloorMap from '../assets/2F-map.png';
 import DrawerContainer from '../components/DrawerContainer';
@@ -18,17 +17,11 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
 
     return (
         <div className='flex justify-center items-center'>
-            <Drawer
-                opened={!!open}
-                onClose={() => setOpen('')}
-                position={open.includes('Forest') ? 'right' : 'left'}
-                offset={8}
-                radius='md'
-                size='xs'
-                title={open}
-            >
-                <DrawerContainer data={filteredData[open] || []} />
-            </Drawer>
+            <DrawerContainer
+                open={open}
+                handleOpen={(value) => setOpen(value)}
+                data={filteredData[open] || []}
+            />
             <div className='relative z-0 h-[80%] w-[78%]'>
                 <img
                     src={SecondFloorMap}
@@ -43,7 +36,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Wide-Deck-AP-1' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[1%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[1%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -55,7 +48,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Wide-Deck-AP-2' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[16.5%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[16.5%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -67,7 +60,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Wide-Deck-AP-3' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[11.5%] top-[17.5%] w-[27%] h-[10%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[11.5%] top-[17.5%] w-[27%] h-[10%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -79,7 +72,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Wide-Deck-AP-4' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[1%] top-[17.5%] w-[10%] h-[21.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[1%] top-[17.5%] w-[10%] h-[21.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -93,7 +86,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-BYOD-AP-01' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[11.5%] top-[28%] w-[25%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[11.5%] top-[28%] w-[25%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -105,7 +98,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-BYOD-AP-03' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[32.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[32.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -117,7 +110,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-01' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[37%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[37%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -129,7 +122,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-02' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[49.5%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[49.5%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -141,7 +134,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-03' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[7%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[7%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -153,7 +146,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-04' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[15.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[15.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -165,7 +158,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-05' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[24%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[24%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -177,7 +170,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-06' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[41%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[41%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -189,7 +182,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-07' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[32.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[32.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -201,7 +194,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-08' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[49.5%] top-[40%] w-[8%] h-[18%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[49.5%] top-[40%] w-[8%] h-[18%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -213,7 +206,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-09' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[7%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[7%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -225,7 +218,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-10' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[15.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[15.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -237,7 +230,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-11' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[24%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[24%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -249,7 +242,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Team-Lounge-AP-12' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[41%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[41%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -263,7 +256,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Small-Deck-BYOD-AP' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[62.5%] top-[58.5%] w-[7%] h-[19%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[62.5%] top-[58.5%] w-[7%] h-[19%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
@@ -275,7 +268,111 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                             className={`${
                                 open === '2F-Small-Deck-AP' &&
                                 'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-100 left-[50%] top-[58.5%] w-[12%] h-[17%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                            } absolute bg-white rounded opacity-10 left-[50%] top-[58.5%] w-[12%] h-[17%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                    </section>
+                    <section id='cafe-area'>
+                        <div
+                            onClick={() => setOpen('2F-Cafe-BYOD-AP')}
+                            data-note='2F-Cafe-BYOD-AP'
+                            className={`${
+                                open === '2F-Cafe-BYOD-AP' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[70%] top-[21%] w-[16.5%] h-[9%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() => setOpen('2F-Cafe-AP-1')}
+                            data-note='2F-Cafe-AP-1'
+                            className={`${
+                                open === '2F-Cafe-AP-1' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[70%] top-[30.5%] w-[8%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() => setOpen('2F-Cafe-AP-2')}
+                            data-note='2F-Cafe-AP-2'
+                            className={`${
+                                open === '2F-Cafe-AP-2' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[78.5%] top-[30.5%] w-[8%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() => setOpen('2F-Cafe-AP-3')}
+                            data-note='2F-Cafe-AP-3'
+                            className={`${
+                                open === '2F-Cafe-AP-3' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[87%] top-[21%] w-[11.5%] h-[23%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                    </section>
+                    <section id='internal-meeting-rooms'>
+                        <div
+                            onClick={() => setOpen('2F-Meeting-BYOD-AP')}
+                            data-note='2F-Meeting-BYOD-AP'
+                            className={`${
+                                open === '2F-Meeting-BYOD-AP' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[80.5%] top-[61.5%] w-[18.2%] h-[7%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() =>
+                                setOpen('2F-Meeting-Transparency-AP')
+                            }
+                            data-note='2F-Meeting-Transparency-AP'
+                            className={`${
+                                open === '2F-Meeting-Transparency-AP' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[72.2%] top-[45%] w-[8%] h-[19.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() =>
+                                setOpen('2F-Meeting-Win-Together-AP')
+                            }
+                            data-note='2F-Meeting-Win-Together-AP'
+                            className={`${
+                                open === '2F-Meeting-Win-Together-AP' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[81%] top-[45%] w-[17.8%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                        >
+                            <span
+                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                            />
+                        </div>
+                        <div
+                            onClick={() => setOpen('2F-Meeting-Passion-AP')}
+                            data-note='2F-Meeting-Passion-AP'
+                            className={`${
+                                open === '2F-Meeting-Passion-AP' &&
+                                'opacity-80 animate-bounce'
+                            } absolute bg-white rounded opacity-10 left-[80.5%] top-[69%] w-[18.2%] h-[8.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
                             <span
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}

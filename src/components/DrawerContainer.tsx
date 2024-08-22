@@ -1,4 +1,4 @@
-import { Autocomplete, Loader, Text } from '@mantine/core';
+import { Autocomplete, Drawer, Loader, Text } from '@mantine/core';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
@@ -7,13 +7,15 @@ import { KasvotMember } from '../types/kasvot.types';
 import { kasvotFetcher } from '../utilities/utilities';
 
 interface Props {
+    open: string;
+    handleOpen: (value: string) => void;
     data: {
         user: CasvalUser;
         userLocation: CasvalUserLocation;
     }[];
 }
 
-const DrawerContainer = ({ data }: Props): JSX.Element => {
+const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const { data: members, isLoading } = useSWR<{
@@ -60,43 +62,59 @@ const DrawerContainer = ({ data }: Props): JSX.Element => {
     }, [filteredMembers, searchQuery]);
 
     return (
-        <div className='h-full w-[17rem]'>
-            {isLoading && <Loader />}
-            {!isLoading && (
-                <>
-                    <Autocomplete
-                        className='w-[17rem]'
-                        placeholder='Search for a user ...'
-                        onChange={setSearchQuery}
-                    />
-                    {filteredSearch.map((user) => (
-                        <div
-                            className='w-full flex justify-start items-center my-2 p-1 hover:bg-slate-100 hover:rounded-lg space-x-4'
-                            key={user.user.id}
-                        >
-                            <img
-                                src={user.kasvotData.imgUrl}
-                                className='h-[4rem] w-[3rem] object-cover rounded-full'
-                            />
-                            <div>
-                                <Text>{user.kasvotData.name}</Text>
-                                <Text c='dimmed' size='xs'>
-                                    {`Last Seen: ${DateTime.fromISO(
-                                        user.userLocation.last_seen
-                                    ).toRelative({
-                                        unit: ['hours', 'minutes'],
-                                    })}`}
-                                </Text>
+        <Drawer
+            opened={!!open}
+            onClose={() => handleOpen('')}
+            position={
+                open.includes('Wide-Deck') || open.includes('Team-Lounge')
+                    ? 'right'
+                    : 'left'
+            }
+            offset={8}
+            radius='md'
+            size='xs'
+            title={open}
+        >
+            <div className='h-full w-[17rem]'>
+                {isLoading && <Loader />}
+                {!isLoading && (
+                    <>
+                        <Autocomplete
+                            className='w-[17rem]'
+                            placeholder='Search for a user ...'
+                            onChange={setSearchQuery}
+                        />
+                        {filteredSearch.map((user) => (
+                            <div
+                                className='w-full flex justify-start items-center my-2 p-1 hover:bg-slate-100 hover:rounded-lg space-x-4'
+                                key={user.user.id}
+                            >
+                                <img
+                                    src={user.kasvotData.imgUrl}
+                                    className='h-[4rem] w-[3rem] object-cover rounded-full'
+                                />
+                                <div>
+                                    <Text>{user.kasvotData.name}</Text>
+                                    <Text c='dimmed' size='xs'>
+                                        {`Last Seen: ${DateTime.fromISO(
+                                            user.userLocation.last_seen
+                                        ).toRelative({
+                                            unit: ['hours', 'minutes'],
+                                        })}`}
+                                    </Text>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                    {filteredSearch.length === 0 && (
-                        <Text className='my-2'>No users in the area ...</Text>
-                    )}
-                </>
-            )}
-        </div>
+                        ))}
+                        {filteredSearch.length === 0 && (
+                            <Text className='my-2'>
+                                No users in the area ...
+                            </Text>
+                        )}
+                    </>
+                )}
+            </div>
+        </Drawer>
     );
 };
 
-export default DrawerContainer;
+export default LocationDrawer;
