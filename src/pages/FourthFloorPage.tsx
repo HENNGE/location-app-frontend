@@ -1,7 +1,7 @@
-import { Drawer, Text } from '@mantine/core';
+import { Text } from '@mantine/core';
 import { useState } from 'react';
 import FourthFloorMap from '../assets/4F-map.png';
-import DrawerContainer from '../components/DrawerContainer';
+import LocationDrawer from '../components/LocationDrawer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 import useFilteredData from '../utilities/hooks';
 
@@ -18,17 +18,11 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
 
     return (
         <div className='flex justify-center items-center'>
-            <Drawer
-                opened={!!open}
-                onClose={() => setOpen('')}
-                position={open.includes('Forest') ? 'right' : 'left'}
-                offset={8}
-                radius='md'
-                size='xs'
-                title={open}
-            >
-                <DrawerContainer data={filteredData[open] || []} />
-            </Drawer>
+            <LocationDrawer
+                open={open}
+                handleOpen={(value) => setOpen(value)}
+                data={filteredData[open] || []}
+            />
             <div className='relative z-0 h-[80%] w-[85%]'>
                 <img
                     src={FourthFloorMap}

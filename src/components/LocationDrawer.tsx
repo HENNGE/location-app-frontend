@@ -1,10 +1,11 @@
-import { Autocomplete, Drawer, Loader, Text } from '@mantine/core';
+import { Autocomplete, Drawer, DrawerRootProps, Text } from '@mantine/core';
 import { DateTime } from 'luxon';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
 import { kasvotFetcher } from '../utilities/utilities';
+import LoadingComponent from './LoadingComponent';
 
 interface Props {
     open: string;
@@ -17,6 +18,28 @@ interface Props {
 
 const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [drawerPosition, setDrawerPosition] =
+        useState<DrawerRootProps['position']>('left');
+    const [isClosing, setIsClosing] = useState(false);
+
+    // handles weird effect where drawer momentarily shifts left before closing
+    useEffect(() => {
+        if (open) {
+            setIsClosing(false);
+            if (
+                open.includes('Wide-Deck') ||
+                open.includes('Team-Lounge') ||
+                open.includes('Forest') ||
+                open.includes('South') ||
+                open.includes('Meeting Rooms') ||
+                open.includes('Lounge')
+            ) {
+                setDrawerPosition('right');
+            } else {
+                setDrawerPosition('left');
+            }
+        }
+    }, [open]);
 
     const { data: members, isLoading } = useSWR<{
         data: { member: KasvotMember[] };
@@ -63,20 +86,16 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
 
     return (
         <Drawer
-            opened={!!open}
+            opened={!!open && !isClosing}
             onClose={() => handleOpen('')}
-            position={
-                open.includes('Wide-Deck') || open.includes('Team-Lounge')
-                    ? 'right'
-                    : 'left'
-            }
+            position={drawerPosition}
             offset={8}
             radius='md'
             size='xs'
             title={open}
         >
             <div className='h-full w-[17rem]'>
-                {isLoading && <Loader />}
+                {isLoading && <LoadingComponent message='Fetching users ...' />}
                 {!isLoading && (
                     <>
                         <Autocomplete

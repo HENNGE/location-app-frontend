@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SecondFloorMap from '../assets/2F-map.png';
-import DrawerContainer from '../components/DrawerContainer';
+import LocationDrawer from '../components/LocationDrawer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 import useFilteredData from '../utilities/hooks';
 
@@ -17,7 +17,7 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
 
     return (
         <div className='flex justify-center items-center'>
-            <DrawerContainer
+            <LocationDrawer
                 open={open}
                 handleOpen={(value) => setOpen(value)}
                 data={filteredData[open] || []}

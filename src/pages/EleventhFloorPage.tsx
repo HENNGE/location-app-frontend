@@ -1,7 +1,6 @@
-import { Drawer } from '@mantine/core';
 import { useState } from 'react';
 import EleventhFloorMap from '../assets/11F-map.png';
-import DrawerContainer from '../components/DrawerContainer';
+import LocationDrawer from '../components/LocationDrawer';
 import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 import useFilteredData from '../utilities/hooks';
 
@@ -18,17 +17,11 @@ const EleventhFloorPage = ({ data }: Props): JSX.Element => {
 
     return (
         <div className='flex justify-center items-center'>
-            <Drawer
-                opened={!!open}
-                onClose={() => setOpen('')}
-                position={open.includes('Lounge') ? 'right' : 'left'}
-                offset={8}
-                radius='md'
-                size='xs'
-                title={open}
-            >
-                <DrawerContainer data={filteredData[open] || []} />
-            </Drawer>
+            <LocationDrawer
+                open={open}
+                handleOpen={(value) => setOpen(value)}
+                data={filteredData[open] || []}
+            />
             <div className='relative z-0 h-[80%] w-[65%]'>
                 <img
                     src={EleventhFloorMap}

@@ -1,9 +1,10 @@
-import { AppShell, Container, Loader, MantineProvider } from '@mantine/core';
+import { AppShell, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useSWR from 'swr';
 import Header from './components/Header';
+import LoadingComponent from './components/LoadingComponent';
 import NavbarButtons from './components/NavbarButtons';
 import EleventhFloorPage from './pages/EleventhFloorPage';
 import ErrorPage from './pages/ErrorPage';
@@ -46,7 +47,9 @@ const App = (): JSX.Element => {
                     >
                         <BrowserRouter>
                             {error && <ErrorPage />}
-                            {isLoading && <Loader />}
+                            {isLoading && (
+                                <LoadingComponent message='Fetching map data ...' />
+                            )}
                             {data && (
                                 <Routes>
                                     <Route path='*' element={<ErrorPage />} />
