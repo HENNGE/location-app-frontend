@@ -2,7 +2,7 @@ import { AppShell, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import useSWR from 'swr';
+import useSWR, { SWRConfig } from 'swr';
 import Header from './components/Header';
 import LoadingComponent from './components/LoadingComponent';
 import NavbarButtons from './components/NavbarButtons';
@@ -49,51 +49,56 @@ const App = (): JSX.Element => {
                         className='flex justify-center items-center'
                     >
                         <BrowserRouter>
-                            {error && <ErrorPage />}
-                            {isLoading && (
-                                <LoadingComponent message='Fetching map data ...' />
-                            )}
-                            {data && (
-                                <Routes>
-                                    <Route path='*' element={<ErrorPage />} />
-                                    <Route
-                                        path='/'
-                                        element={<Navigate to='/level-2' />}
-                                    />
-                                    <Route
-                                        path='/level-2'
-                                        element={
-                                            <SecondFloorPage
-                                                data={data.secondFloor}
-                                            />
-                                        }
-                                    />
-                                    <Route
-                                        path='/level-4'
-                                        element={
-                                            <FourthFloorPage
-                                                data={data.fourthFloor}
-                                            />
-                                        }
-                                    />
-                                    <Route
-                                        path='/level-5'
-                                        element={
-                                            <FifthFloorPage
-                                                data={data.fifthFloor}
-                                            />
-                                        }
-                                    />
-                                    <Route
-                                        path='/level-11'
-                                        element={
-                                            <EleventhFloorPage
-                                                data={data.eleventhFloor}
-                                            />
-                                        }
-                                    />
-                                </Routes>
-                            )}
+                            <SWRConfig value={{ provider: () => new Map() }}>
+                                {error && <ErrorPage />}
+                                {isLoading && (
+                                    <LoadingComponent message='Fetching map data ...' />
+                                )}
+                                {data && (
+                                    <Routes>
+                                        <Route
+                                            path='*'
+                                            element={<ErrorPage />}
+                                        />
+                                        <Route
+                                            path='/'
+                                            element={<Navigate to='/level-2' />}
+                                        />
+                                        <Route
+                                            path='/level-2'
+                                            element={
+                                                <SecondFloorPage
+                                                    data={data.secondFloor}
+                                                />
+                                            }
+                                        />
+                                        <Route
+                                            path='/level-4'
+                                            element={
+                                                <FourthFloorPage
+                                                    data={data.fourthFloor}
+                                                />
+                                            }
+                                        />
+                                        <Route
+                                            path='/level-5'
+                                            element={
+                                                <FifthFloorPage
+                                                    data={data.fifthFloor}
+                                                />
+                                            }
+                                        />
+                                        <Route
+                                            path='/level-11'
+                                            element={
+                                                <EleventhFloorPage
+                                                    data={data.eleventhFloor}
+                                                />
+                                            }
+                                        />
+                                    </Routes>
+                                )}
+                            </SWRConfig>
                         </BrowserRouter>
                     </Container>
                 </AppShell.Main>

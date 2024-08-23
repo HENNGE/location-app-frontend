@@ -44,7 +44,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
     const { data: members, isLoading } = useSWR<{
         data: { member: KasvotMember[] };
     }>(
-        'query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name}}}}',
+        'query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}',
         kasvotFetcher
     );
 
@@ -52,8 +52,16 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         return data.map((casvalUser) => {
             if (members) {
                 const matchingUser = members.data.member.find(
-                    (kasvotMember) =>
-                        kasvotMember.email === casvalUser.user.email
+                    (kasvotMember) => {
+                        if (kasvotMember.email === casvalUser.user.email) {
+                            kasvotMember.positionDepartment?.sort(
+                                (a, b) =>
+                                    (a.position?.priority || 0) -
+                                    (b.position?.priority || 0)
+                            );
+                            return kasvotMember;
+                        }
+                    }
                 );
                 if (matchingUser) {
                     return { ...casvalUser, kasvotData: matchingUser };
@@ -112,8 +120,11 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                                 key={user.user.id}
                             >
                                 <img
+                                    loading='lazy'
                                     src={user.kasvotData.imgUrl}
+                                    alt={`${user.kasvotData.name}'s picture`}
                                     className='h-[4rem] w-[3rem] object-cover rounded-full'
+                                    title='profile image'
                                 />
                                 <div>
                                     <Text>{user.kasvotData.name}</Text>

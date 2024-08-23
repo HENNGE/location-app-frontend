@@ -1,4 +1,7 @@
 import axios from 'axios';
+import highCount from '../assets/hight-count.svg';
+import lowCount from '../assets/low-count.svg';
+import midCount from '../assets/mid-count.svg';
 
 export const fetcher = async (endpoint: string) => {
     const url = `${import.meta.env.VITE_CASVAL_URL}${endpoint}`;
@@ -28,4 +31,16 @@ export const kasvotFetcher = async (query: string) => {
     );
 
     return response.data;
+};
+
+export const getCountIcon = (count: number) => {
+    if (count === 1) {
+        return lowCount;
+    } else if (count === 2) {
+        return midCount;
+    } else if (count >= 3) {
+        return highCount;
+    } else {
+        return;
+    }
 };

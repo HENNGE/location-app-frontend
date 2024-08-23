@@ -13,6 +13,7 @@ export interface KasvotMember {
         position?: {
             id?: string;
             name?: string;
+            priority?: number;
         };
     }[];
 }
