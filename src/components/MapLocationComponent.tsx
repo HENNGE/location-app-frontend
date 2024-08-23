@@ -1,3 +1,4 @@
+import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
 import { getCountIcon } from '../utilities/utilities';
 
 interface Props {
@@ -8,7 +9,12 @@ interface Props {
         width: string;
         height: string;
     };
-    userCount: number;
+    data: {
+        [key: string]: {
+            user: CasvalUser;
+            userLocation: CasvalUserLocation;
+        }[];
+    };
     active: string;
     handleClick: (value: string) => void;
 }
@@ -16,7 +22,7 @@ interface Props {
 const MapLocationComponent = ({
     name,
     size,
-    userCount,
+    data,
     active,
     handleClick,
 }: Props) => {
@@ -31,9 +37,12 @@ const MapLocationComponent = ({
                     : 'opacity-100'
             } ${classSize} absolute rounded-lg hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
         >
-            <img src={getCountIcon(userCount)} className='h-20 w-auto' />
+            <img
+                src={getCountIcon(data[name] ? data[name].length : 0)}
+                className='h-[60%] w-auto'
+            />
             <span
-                className={`absolute inline-flex h-[100%] w-[100%] opacity-10 rounded-lg bg-gray-200 hover:animate-ping hover:opacity-100`}
+                className={`absolute inline-flex h-[100%] w-[100%] opacity-0 rounded-lg bg-gray-200 hover:animate-ping hover:opacity-100`}
             />
         </div>
     );
