@@ -1,4 +1,4 @@
-import { AppShell, Container, MantineProvider } from '@mantine/core';
+import { AppShell, Container, MantineProvider, Text } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
@@ -55,48 +55,63 @@ const App = (): JSX.Element => {
                                     <LoadingComponent message='Fetching map data ...' />
                                 )}
                                 {data && (
-                                    <Routes>
-                                        <Route
-                                            path='*'
-                                            element={<ErrorPage />}
-                                        />
-                                        <Route
-                                            path='/'
-                                            element={<Navigate to='/level-2' />}
-                                        />
-                                        <Route
-                                            path='/level-2'
-                                            element={
-                                                <SecondFloorPage
-                                                    data={data.secondFloor}
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path='/level-4'
-                                            element={
-                                                <FourthFloorPage
-                                                    data={data.fourthFloor}
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path='/level-5'
-                                            element={
-                                                <FifthFloorPage
-                                                    data={data.fifthFloor}
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path='/level-11'
-                                            element={
-                                                <EleventhFloorPage
-                                                    data={data.eleventhFloor}
-                                                />
-                                            }
-                                        />
-                                    </Routes>
+                                    <div className='flex flex-col justify-center items-center'>
+                                        {data && (
+                                            <Text
+                                                c='dimmed'
+                                                size='md'
+                                                className='mb-4'
+                                            >
+                                                {`Second Floor: ${data.secondFloor.length} Fourth Floor: ${data.fourthFloor.length} Fifth Floor: ${data.fifthFloor.length} Eleventh Floor: ${data.eleventhFloor.length}`}
+                                            </Text>
+                                        )}
+                                        <Routes>
+                                            <Route
+                                                path='*'
+                                                element={<ErrorPage />}
+                                            />
+                                            <Route
+                                                path='/'
+                                                element={
+                                                    <Navigate to='/level-2' />
+                                                }
+                                            />
+                                            <Route
+                                                path='/level-2'
+                                                element={
+                                                    <SecondFloorPage
+                                                        data={data.secondFloor}
+                                                    />
+                                                }
+                                            />
+                                            <Route
+                                                path='/level-4'
+                                                element={
+                                                    <FourthFloorPage
+                                                        data={data.fourthFloor}
+                                                    />
+                                                }
+                                            />
+                                            <Route
+                                                path='/level-5'
+                                                element={
+                                                    <FifthFloorPage
+                                                        data={data.fifthFloor}
+                                                    />
+                                                }
+                                            />
+                                            <Route
+                                                path='/level-11'
+                                                element={
+                                                    <EleventhFloorPage
+                                                        data={
+                                                            data.eleventhFloor
+                                                        }
+                                                    />
+                                                }
+                                            />
+                                        </Routes>
+                                    </div>
                                 )}
                             </SWRConfig>
                         </BrowserRouter>

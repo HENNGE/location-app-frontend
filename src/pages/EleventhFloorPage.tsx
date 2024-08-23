@@ -22,7 +22,7 @@ const EleventhFloorPage = ({ data }: Props): JSX.Element => {
                 handleOpen={(value) => setOpen(value)}
                 data={filteredData[open] || []}
             />
-            <div className='relative z-0 h-[80%] w-[65%]'>
+            <div className='relative z-0 h-[80%] w-[61%]'>
                 <img
                     src={EleventhFloorMap}
                     draggable='false'

@@ -35,7 +35,7 @@ const MapLocationComponent = ({
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-100'
-            } ${classSize} absolute rounded-lg hover:scale-90 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
+            } ${classSize} absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
         >
             <img
                 src={getCountIcon(data[name] ? data[name].length : 0)}

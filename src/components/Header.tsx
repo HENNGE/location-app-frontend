@@ -1,5 +1,4 @@
-import { AppShell, Burger, Group, Text, Title } from '@mantine/core';
-import { useCallback } from 'react';
+import { AppShell, Burger, Group, Title } from '@mantine/core';
 import NavbarButtons from './NavbarButtons';
 
 interface Props {
@@ -8,24 +7,8 @@ interface Props {
 }
 
 const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
-    const path = window.location.pathname;
     // const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     // const [searchValue, setSearchValue] = useState('');
-
-    const displayLevel = useCallback(() => {
-        switch (path) {
-            case '/':
-                return '2F';
-            case '/level-2':
-                return '2F';
-            case '/level-4':
-                return '4F';
-            case '/level-5':
-                return '5F';
-            case '/level-11':
-                return '11F';
-        }
-    }, [path]);
 
     return (
         <AppShell.Header>
@@ -44,9 +27,6 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
                         >
                             HENNGE Location
                         </Title>
-                        <Text className='ml-4' c='dimmed' size='lg'>
-                            {displayLevel()}
-                        </Text>
                     </div>
 
                     {/* {!isMobile && (
