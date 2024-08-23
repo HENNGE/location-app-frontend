@@ -25,7 +25,10 @@ const App = (): JSX.Element => {
     return (
         <MantineProvider
             defaultColorScheme='light'
-            theme={{ fontFamily: 'Poppins, sans-serif' }}
+            theme={{
+                fontFamily: 'Poppins, sans-serif',
+                headings: { fontFamily: 'Poppins, sans-serif' },
+            }}
         >
             <AppShell
                 header={{ height: 60 }}

@@ -32,7 +32,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                 open.includes('Forest') ||
                 open.includes('South') ||
                 open.includes('Meeting Rooms') ||
-                open.includes('Lounge')
+                open.includes('2F-Team-Lounge')
             ) {
                 setDrawerPosition('right');
             } else {
@@ -43,7 +43,10 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
 
     const { data: members, isLoading } = useSWR<{
         data: { member: KasvotMember[] };
-    }>('query{member{id name email imgUrl}}', kasvotFetcher);
+    }>(
+        'query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name}}}}',
+        kasvotFetcher
+    );
 
     const filteredMembers = useCallback(() => {
         return data.map((casvalUser) => {
@@ -114,7 +117,17 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                                 />
                                 <div>
                                     <Text>{user.kasvotData.name}</Text>
-                                    <Text c='dimmed' size='xs'>
+                                    <div className='flex flex-col'>
+                                        {user.kasvotData.positionDepartment?.map(
+                                            (posDept) => {
+                                                return (
+                                                    <Text className='text-[0.6rem]'>{`${posDept.department?.name} - ${posDept.position?.name}`}</Text>
+                                                );
+                                            }
+                                        )}
+                                    </div>
+
+                                    <Text c='dimmed' className='text-[0.6rem]'>
                                         {`Last Seen: ${DateTime.fromISO(
                                             user.userLocation.last_seen
                                         ).toRelative({

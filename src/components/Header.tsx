@@ -9,6 +9,8 @@ interface Props {
 
 const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
     const path = window.location.pathname;
+    // const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    // const [searchValue, setSearchValue] = useState('');
 
     const displayLevel = useCallback(() => {
         switch (path) {
@@ -47,12 +49,14 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
                         </Text>
                     </div>
 
-                    {/* <Group>
+                    {/* {!isMobile && (
                         <Autocomplete
                             placeholder='Search for a user ...'
                             className='w-[30rem]'
+                            value={searchValue}
+                            onChange={setSearchValue}
                         />
-                    </Group> */}
+                    )} */}
 
                     <Group ml='xl' gap={0} visibleFrom='sm'>
                         <NavbarButtons />

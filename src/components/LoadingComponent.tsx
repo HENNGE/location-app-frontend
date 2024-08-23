@@ -7,7 +7,7 @@ interface Props {
 const LoadingComponent = ({ message }: Props) => {
     return (
         <div className='flex justify-center items-center flex-col space-y-2'>
-            <Loader />
+            <Loader color='#003366' />
             <div>{message}</div>
         </div>
     );

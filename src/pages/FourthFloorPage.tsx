@@ -1,4 +1,3 @@
-import { Text } from '@mantine/core';
 import { useState } from 'react';
 import FourthFloorMap from '../assets/4F-map.png';
 import LocationDrawer from '../components/LocationDrawer';
@@ -35,15 +34,16 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                             onClick={() => setOpen('4F (Lounge - 1)')}
                             data-note='4F (Lounge - 1)'
                             className={`${
-                                open === '4F (Lounge - 1)' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[46.7%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+                                open === '4F (Lounge - 1)'
+                                    ? 'opacity-100 animate-pulse border-double bg-white'
+                                    : 'opacity-60'
+                            } absolute rounded-lg border-[1px] left-[46.7%] top-[38.5%] w-[15%] h-[20.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
                         >
-                            <Text className='z-10 text-7xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] pointer-events-none'>
+                            <span className='z-10 text-7xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] pointer-events-none'>
                                 {filteredData['4F (Lounge - 1)'].length}
-                            </Text>
+                            </span>
                             <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
+                                className={`absolute inline-flex h-[100%] w-[100%] opacity-10 rounded-lg bg-gray-200 hover:animate-ping hover:opacity-100`}
                             />
                         </div>
                         <div
