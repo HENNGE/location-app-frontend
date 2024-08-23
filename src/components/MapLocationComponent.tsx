@@ -33,16 +33,13 @@ const MapLocationComponent = ({
             data-note={name}
             className={`${
                 active === name
-                    ? 'opacity-100 animate-pulse border-double bg-white'
+                    ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-100'
-            } ${classSize} absolute rounded-lg hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
+            } ${classSize} absolute rounded-lg hover:scale-90 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
         >
             <img
                 src={getCountIcon(data[name] ? data[name].length : 0)}
                 className='h-[60%] w-auto'
-            />
-            <span
-                className={`absolute inline-flex h-[100%] w-[100%] opacity-0 rounded-lg bg-gray-200 hover:animate-ping hover:opacity-100`}
             />
         </div>
     );

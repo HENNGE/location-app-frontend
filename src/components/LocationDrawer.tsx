@@ -104,6 +104,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             radius='md'
             size='xs'
             title={open}
+            overlayProps={{ backgroundOpacity: 0.25, blur: 0 }}
         >
             <div className='h-full w-[17rem]'>
                 {isLoading && <LoadingComponent message='Fetching users ...' />}
