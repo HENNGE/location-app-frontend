@@ -10,7 +10,7 @@ const NavbarButtons = (): JSX.Element => {
                         path === '/level-2' && 'bg-[#003366] text-white'
                     }`}
                 >
-                    Level 2
+                    2F
                 </UnstyledButton>
             </a>
             <a href='/level-4'>
@@ -19,7 +19,7 @@ const NavbarButtons = (): JSX.Element => {
                         path === '/level-4' && 'bg-[#003366] text-white'
                     }`}
                 >
-                    Level 4
+                    4F
                 </UnstyledButton>
             </a>
             <a href='/level-5'>
@@ -28,7 +28,7 @@ const NavbarButtons = (): JSX.Element => {
                         path === '/level-5' && 'bg-[#003366] text-white'
                     }`}
                 >
-                    Level 5
+                    5F
                 </UnstyledButton>
             </a>
             <a href='/level-11'>
@@ -37,7 +37,7 @@ const NavbarButtons = (): JSX.Element => {
                         path === '/level-11' && 'bg-[#003366] text-white'
                     }`}
                 >
-                    Level 11
+                    11F
                 </UnstyledButton>
             </a>
         </div>

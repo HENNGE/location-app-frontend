@@ -26,16 +26,21 @@ const MapLocationComponent = ({
     active,
     handleClick,
 }: Props) => {
-    const classSize = `left-[${size.left}] top-[${size.top}] w-[${size.width}] h-[${size.height}]`;
     return (
         <div
             onClick={() => handleClick(name)}
             data-note={name}
+            style={{
+                left: size.left,
+                top: size.top,
+                width: size.width,
+                height: size.height,
+            }}
             className={`${
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-100'
-            } ${classSize} absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
+            } absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
         >
             <img
                 src={getCountIcon(data[name] ? data[name].length : 0)}
