@@ -15,6 +15,10 @@ export const fetcher = async (endpoint: string) => {
 };
 
 export const kasvotFetcher = async (query: string) => {
+    if (!query) {
+        return;
+    }
+
     const url = `${import.meta.env.VITE_KASVOT_URL}`;
 
     const response = await axios.post(
