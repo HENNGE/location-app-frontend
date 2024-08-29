@@ -23,7 +23,7 @@ const App = (): JSX.Element => {
 
     useEffect(() => {
         Cache.getItem('signoutTimestamp').then((signoutTimestamp) =>
-            setSignoutTimestamp(signoutTimestamp)
+            setSignoutTimestamp(signoutTimestamp || '')
         );
     }, []);
 
