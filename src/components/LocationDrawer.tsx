@@ -22,7 +22,11 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
     useEffect(() => {
         if (open) {
             setIsClosing(false);
-            if (open.includes('11F Guest Meeting Rooms')) {
+            if (
+                open.includes('11F Guest Meeting Rooms') ||
+                open.includes('5F Meeting Rooms') ||
+                open.includes('5F Web Meeting')
+            ) {
                 setDrawerPosition('right');
             } else {
                 setDrawerPosition('left');
