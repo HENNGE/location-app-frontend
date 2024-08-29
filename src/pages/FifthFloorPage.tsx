@@ -1,27 +1,16 @@
 import { useState } from 'react';
 import FifthFloorMap from '../assets/5F-map.png';
-import LocationDrawer from '../components/LocationDrawer';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
-import useFilteredData from '../utilities/hooks';
 
-interface Props {
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-}
-
-const FifthFloorPage = ({ data }: Props): JSX.Element => {
+const FifthFloorPage = (): JSX.Element => {
     const [open, setOpen] = useState('');
-    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>
-            <LocationDrawer
+            {/* <LocationDrawer
                 open={open}
                 handleOpen={(value) => setOpen(value)}
                 data={filteredData[open] || []}
-            />
+            /> */}
             <div className='relative z-0 h-[80%] w-[61%]'>
                 <img
                     src={FifthFloorMap}

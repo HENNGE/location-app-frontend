@@ -1,8 +1,7 @@
 import { Autocomplete, Drawer, DrawerRootProps, Text } from '@mantine/core';
-import { DateTime } from 'luxon';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
 import { kasvotFetcher } from '../utilities/utilities';
 import LoadingComponent from './LoadingComponent';
@@ -10,10 +9,7 @@ import LoadingComponent from './LoadingComponent';
 interface Props {
     open: string;
     handleOpen: (value: string) => void;
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
+    data: FetchedCasvalData[];
 }
 
 const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
@@ -26,14 +22,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
     useEffect(() => {
         if (open) {
             setIsClosing(false);
-            if (
-                open.includes('Wide-Deck') ||
-                open.includes('Team-Lounge') ||
-                open.includes('Forest') ||
-                open.includes('South') ||
-                open.includes('Meeting Rooms') ||
-                open.includes('2F-Team-Lounge')
-            ) {
+            if (open.includes('11F Guest Meeting Rooms')) {
                 setDrawerPosition('right');
             } else {
                 setDrawerPosition('left');
@@ -41,59 +30,45 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         }
     }, [open]);
 
-    const { data: members, isLoading } = useSWR<{
-        data: { member: KasvotMember[] };
-    }>(
-        'query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}',
-        kasvotFetcher
-    );
+    const filteredData = useMemo(() => {
+        const [output] = data.filter((data) => data.areaTag.name === open);
+        if (output) {
+            return output.users;
+        }
+        return [];
+    }, [data, open]);
 
-    const filteredMembers = useCallback(() => {
-        return data.map((casvalUser) => {
-            if (members) {
-                const matchingUser = members.data.member.find(
-                    (kasvotMember) => {
-                        if (kasvotMember.email === casvalUser.user.email) {
-                            kasvotMember.positionDepartment?.sort(
-                                (a, b) =>
-                                    (a.position?.priority || 0) -
-                                    (b.position?.priority || 0)
-                            );
-                            return kasvotMember;
-                        }
-                    }
+    const { data: members, isLoading } = useSWR(filteredData, (users) => {
+        return Promise.all(
+            users.map(async (user) => {
+                const { member } = await kasvotFetcher<{
+                    member: KasvotMember[];
+                }>(
+                    `query{member(email: "${user.email}"){id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`
                 );
-                if (matchingUser) {
-                    return { ...casvalUser, kasvotData: matchingUser };
-                } else {
-                    return { ...casvalUser, kasvotData: {} };
-                }
-            } else {
-                return { ...casvalUser, kasvotData: {} };
-            }
-        });
-    }, [data, members]);
+
+                return member[0];
+            })
+        );
+    });
 
     const filteredSearch = useMemo(() => {
-        const output: {
-            user: CasvalUser;
-            userLocation: CasvalUserLocation;
-            kasvotData: KasvotMember;
-        }[] = [];
+        const output: KasvotMember[] = [];
 
-        filteredMembers().forEach((member) => {
-            if (
-                member.kasvotData.name &&
-                member.kasvotData.name
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase())
-            ) {
-                output.push(member);
-            }
-        });
-
+        if (members) {
+            members.forEach((member) => {
+                if (
+                    member.name &&
+                    member.name
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                ) {
+                    output.push(member);
+                }
+            });
+        }
         return output;
-    }, [filteredMembers, searchQuery]);
+    }, [members, searchQuery]);
 
     return (
         <Drawer
@@ -107,7 +82,11 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             overlayProps={{ backgroundOpacity: 0.25, blur: 0 }}
         >
             <div className='h-full w-[17rem]'>
-                {isLoading && <LoadingComponent message='Fetching users ...' />}
+                {isLoading && (
+                    <div className='w-full h-[50vh] flex justify-center items-center'>
+                        <LoadingComponent message='Fetching map data ...' />
+                    </div>
+                )}
                 {!isLoading && (
                     <>
                         <Autocomplete
@@ -118,19 +97,19 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                         {filteredSearch.map((user) => (
                             <div
                                 className='w-full flex justify-start items-center my-2 p-1 hover:bg-slate-100 hover:rounded-lg space-x-4'
-                                key={user.user.id}
+                                key={user.id}
                             >
                                 <img
                                     loading='lazy'
-                                    src={user.kasvotData.imgUrl}
-                                    alt={`${user.kasvotData.name}'s picture`}
+                                    src={user.imgUrl}
+                                    alt={`${user.name}'s picture`}
                                     className='h-[4rem] w-[3rem] object-cover rounded-full'
                                     title='profile image'
                                 />
                                 <div>
-                                    <Text>{user.kasvotData.name}</Text>
+                                    <Text>{user.name}</Text>
                                     <div className='flex flex-col'>
-                                        {user.kasvotData.positionDepartment?.map(
+                                        {user.positionDepartment?.map(
                                             (posDept) => {
                                                 return (
                                                     <Text className='text-[0.6rem]'>{`${posDept.department?.name} - ${posDept.position?.name}`}</Text>
@@ -138,14 +117,6 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                                             }
                                         )}
                                     </div>
-
-                                    <Text c='dimmed' className='text-[0.6rem]'>
-                                        {`Last Seen: ${DateTime.fromISO(
-                                            user.userLocation.last_seen
-                                        ).toRelative({
-                                            unit: ['hours', 'minutes'],
-                                        })}`}
-                                    </Text>
                                 </div>
                             </div>
                         ))}

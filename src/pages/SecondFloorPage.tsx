@@ -1,27 +1,16 @@
 import { useState } from 'react';
 import SecondFloorMap from '../assets/2F-map.png';
-import LocationDrawer from '../components/LocationDrawer';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
-import useFilteredData from '../utilities/hooks';
 
-interface Props {
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-}
-
-const SecondFloorPage = ({ data }: Props): JSX.Element => {
+const SecondFloorPage = (): JSX.Element => {
     const [open, setOpen] = useState('');
-    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>
-            <LocationDrawer
+            {/* <LocationDrawer
                 open={open}
                 handleOpen={(value) => setOpen(value)}
                 data={filteredData[open] || []}
-            />
+            /> */}
             <div className='relative z-0 h-[80%] w-[73%]'>
                 <img
                     src={SecondFloorMap}
@@ -378,6 +367,20 @@ const SecondFloorPage = ({ data }: Props): JSX.Element => {
                                 className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
                             />
                         </div>
+                    </section>
+                    <section id='studio'>
+                        {/* <MapLocationComponent
+                            name='2F-Studio-AP'
+                            size={{
+                                left: '10.5%',
+                                top: '84%',
+                                width: '23%',
+                                height: '13.5%',
+                            }}
+                            data={filteredData}
+                            active={open}
+                            handleClick={(value) => setOpen(value)}
+                        /> */}
                     </section>
                 </div>
             </div>

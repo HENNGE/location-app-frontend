@@ -1,4 +1,4 @@
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import { FetchedCasvalData } from '../types/casval.types';
 import { getCountIcon } from '../utilities/utilities';
 
 interface Props {
@@ -9,12 +9,7 @@ interface Props {
         width: string;
         height: string;
     };
-    data: {
-        [key: string]: {
-            user: CasvalUser;
-            userLocation: CasvalUserLocation;
-        }[];
-    };
+    data: FetchedCasvalData[];
     active: string;
     handleClick: (value: string) => void;
 }
@@ -26,6 +21,10 @@ const MapLocationComponent = ({
     active,
     handleClick,
 }: Props) => {
+    const [filteredData] = data.filter(
+        (fetchedData) => fetchedData.areaTag.name === name
+    );
+
     return (
         <div
             onClick={() => handleClick(name)}
@@ -40,11 +39,11 @@ const MapLocationComponent = ({
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-100'
-            } absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
+            } absolute rounded-lghover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
         >
             <img
-                src={getCountIcon(data[name] ? data[name].length : 0)}
-                className='h-[60%] w-auto'
+                src={getCountIcon(filteredData ? filteredData.users.length : 0)}
+                className='h-[5rem] w-auto'
             />
         </div>
     );

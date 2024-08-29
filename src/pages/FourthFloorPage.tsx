@@ -1,35 +1,23 @@
 import { useState } from 'react';
 import FourthFloorMap from '../assets/4F-map.png';
-import LocationDrawer from '../components/LocationDrawer';
-import MapLocationComponent from '../components/MapLocationComponent';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
-import useFilteredData from '../utilities/hooks';
 
-interface Props {
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-}
-
-const FourthFloorPage = ({ data }: Props): JSX.Element => {
+const FourthFloorPage = (): JSX.Element => {
     const [open, setOpen] = useState('');
-    const filteredData = useFilteredData(data);
 
     return (
         <div className='flex justify-center items-center'>
-            <LocationDrawer
+            {/* <LocationDrawer
                 open={open}
                 handleOpen={(value) => setOpen(value)}
                 data={filteredData[open] || []}
-            />
+            /> */}
             <div className='relative z-0 h-[80%] w-[85%]'>
                 <img
                     src={FourthFloorMap}
                     draggable='false'
                     className='z-10 h-full w-full'
                 />
-                <div id='overlay' className='absolute top-0 z-20 w-full h-full'>
+                {/* <div id='overlay' className='absolute top-0 z-20 w-full h-full'>
                     <section id='inner-lounge'>
                         <MapLocationComponent
                             name='4F (Lounge - 1)'
@@ -226,7 +214,7 @@ const FourthFloorPage = ({ data }: Props): JSX.Element => {
                             handleClick={(value) => setOpen(value)}
                         />
                     </section>
-                </div>
+                </div> */}
             </div>
         </div>
     );

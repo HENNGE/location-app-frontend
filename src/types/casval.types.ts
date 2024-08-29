@@ -14,21 +14,13 @@ export interface CasvalUserLocation {
     device_is_primary: boolean;
 }
 
+export interface AreaTag {
+    id: string;
+    name: string;
+    access_points: { id: string; name: string; mac_address: string }[];
+}
+
 export interface FetchedCasvalData {
-    secondFloor: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-    fourthFloor: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-    fifthFloor: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
-    eleventhFloor: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
+    users: CasvalUser[];
+    areaTag: AreaTag;
 }

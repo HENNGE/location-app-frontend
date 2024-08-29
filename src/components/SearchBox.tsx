@@ -30,10 +30,16 @@ const SearchBox = () => {
         kasvotFetcher
     );
 
+    // const { data: casvalLocation } = useSWR(
+    //     ['/query-location', 'edward.peng@hennge.com'],
+    //     ([endpoint, email]) =>
+    //         fetcher<CasvalUserLocation>(endpoint, { email: email })
+    // );
+
     const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
         option,
     }) => (
-        <Group gap='sm'>
+        <Group gap='sm' onClick={() => (window.location.href = '/test')}>
             {/* <a href='/' className='flex space-x-4'> */}
             <Avatar
                 src={
