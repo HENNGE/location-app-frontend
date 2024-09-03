@@ -12,7 +12,7 @@ const SecondFloorPage = (): JSX.Element => {
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
-        '/location-info/11F',
+        '/location-info/2F',
         fetcher<FetchedCasvalData[]>
     );
 
