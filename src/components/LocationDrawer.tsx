@@ -88,7 +88,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             <div className='h-full w-[17rem]'>
                 {isLoading && (
                     <div className='w-full h-[50vh] flex justify-center items-center'>
-                        <LoadingComponent message='Fetching map data ...' />
+                        <LoadingComponent message='Fetching user list ...' />
                     </div>
                 )}
                 {!isLoading && (

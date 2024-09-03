@@ -1,389 +1,147 @@
 import { useState } from 'react';
+import useSWR from 'swr';
 import SecondFloorMap from '../assets/2F-map.png';
+import LoadingComponent from '../components/LoadingComponent';
+import LocationDrawer from '../components/LocationDrawer';
+import MapLocationComponent from '../components/MapLocationComponent';
+import { FetchedCasvalData } from '../types/casval.types';
+import { fetcher } from '../utilities/utilities';
+import ErrorPage from './ErrorPage';
 
 const SecondFloorPage = (): JSX.Element => {
     const [open, setOpen] = useState('');
 
+    const { data, isLoading, error } = useSWR(
+        '/location-info/11F',
+        fetcher<FetchedCasvalData[]>
+    );
+
+    if (error) {
+        return <ErrorPage />;
+    }
+
     return (
         <div className='flex justify-center items-center'>
-            {/* <LocationDrawer
+            <LocationDrawer
                 open={open}
                 handleOpen={(value) => setOpen(value)}
-                data={filteredData[open] || []}
-            /> */}
-            <div className='relative z-0 h-[80%] w-[73%]'>
-                <img
-                    src={SecondFloorMap}
-                    draggable='false'
-                    className='z-10 h-full w-full'
-                />
-                <div id='overlay' className='absolute top-0 z-20 w-full h-full'>
-                    <section id='wide-deck'>
-                        <div
-                            onClick={() => setOpen('2F-Wide-Deck-AP-1')}
-                            data-note='2F-Wide-Deck-AP-1'
-                            className={`${
-                                open === '2F-Wide-Deck-AP-1' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[1%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Wide-Deck-AP-2')}
-                            data-note='2F-Wide-Deck-AP-2'
-                            className={`${
-                                open === '2F-Wide-Deck-AP-2' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[16.5%] top-[1.7%] w-[15%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Wide-Deck-AP-3')}
-                            data-note='2F-Wide-Deck-AP-3'
-                            className={`${
-                                open === '2F-Wide-Deck-AP-3' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[11.5%] top-[17.5%] w-[27%] h-[10%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Wide-Deck-AP-4')}
-                            data-note='2F-Wide-Deck-AP-4'
-                            className={`${
-                                open === '2F-Wide-Deck-AP-4' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[1%] top-[17.5%] w-[10%] h-[21.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                    </section>
-                    <section id='team-lounge'>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-BYOD-AP-01')}
-                            data-note='2F-Team-Lounge-BYOD-AP-01'
-                            className={`${
-                                open === '2F-Team-Lounge-BYOD-AP-01' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[11.5%] top-[28%] w-[25%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-BYOD-AP-03')}
-                            data-note='2F-Team-Lounge-BYOD-AP-03'
-                            className={`${
-                                open === '2F-Team-Lounge-BYOD-AP-03' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[32.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-01')}
-                            data-note='2F-Team-Lounge-AP-01'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-01' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[37%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-02')}
-                            data-note='2F-Team-Lounge-AP-02'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-02' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[49.5%] top-[28%] w-[12%] h-[11%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-03')}
-                            data-note='2F-Team-Lounge-AP-03'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-03' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[7%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-04')}
-                            data-note='2F-Team-Lounge-AP-04'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-04' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[15.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-05')}
-                            data-note='2F-Team-Lounge-AP-05'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-05' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[24%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-06')}
-                            data-note='2F-Team-Lounge-AP-06'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-06' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[41%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-07')}
-                            data-note='2F-Team-Lounge-AP-07'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-07' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[32.5%] top-[40%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-08')}
-                            data-note='2F-Team-Lounge-AP-08'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-08' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[49.5%] top-[40%] w-[8%] h-[18%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-09')}
-                            data-note='2F-Team-Lounge-AP-09'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-09' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[7%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-10')}
-                            data-note='2F-Team-Lounge-AP-10'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-10' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[15.5%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-11')}
-                            data-note='2F-Team-Lounge-AP-11'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-11' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[24%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Team-Lounge-AP-12')}
-                            data-note='2F-Team-Lounge-AP-12'
-                            className={`${
-                                open === '2F-Team-Lounge-AP-12' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[41%] top-[52.8%] w-[8%] h-[12%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                    </section>
-                    <section id='small-deck'>
-                        <div
-                            onClick={() => setOpen('2F-Small-Deck-BYOD-AP')}
-                            data-note='2F-Small-Deck-BYOD-AP'
-                            className={`${
-                                open === '2F-Small-Deck-BYOD-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[57.5%] top-[50%] w-[7%] h-[14.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Small-Deck-AP')}
-                            data-note='2F-Small-Deck-AP'
-                            className={`${
-                                open === '2F-Small-Deck-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[50%] top-[65%] w-[14%] h-[12.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                    </section>
-                    <section id='cafe-area'>
-                        <div
-                            onClick={() => setOpen('2F-Cafe-BYOD-AP')}
-                            data-note='2F-Cafe-BYOD-AP'
-                            className={`${
-                                open === '2F-Cafe-BYOD-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[70%] top-[21%] w-[16.5%] h-[9%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Cafe-AP-1')}
-                            data-note='2F-Cafe-AP-1'
-                            className={`${
-                                open === '2F-Cafe-AP-1' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[70%] top-[30.5%] w-[8%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Cafe-AP-2')}
-                            data-note='2F-Cafe-AP-2'
-                            className={`${
-                                open === '2F-Cafe-AP-2' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[78.5%] top-[30.5%] w-[8%] h-[13.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Cafe-AP-3')}
-                            data-note='2F-Cafe-AP-3'
-                            className={`${
-                                open === '2F-Cafe-AP-3' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[87%] top-[21%] w-[11.5%] h-[23%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                    </section>
-                    <section id='internal-meeting-rooms'>
-                        <div
-                            onClick={() => setOpen('2F-Meeting-BYOD-AP')}
-                            data-note='2F-Meeting-BYOD-AP'
-                            className={`${
-                                open === '2F-Meeting-BYOD-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[80.5%] top-[61.5%] w-[18.2%] h-[7%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() =>
-                                setOpen('2F-Meeting-Transparency-AP')
-                            }
-                            data-note='2F-Meeting-Transparency-AP'
-                            className={`${
-                                open === '2F-Meeting-Transparency-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[72.2%] top-[45%] w-[8%] h-[19.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() =>
-                                setOpen('2F-Meeting-Win-Together-AP')
-                            }
-                            data-note='2F-Meeting-Win-Together-AP'
-                            className={`${
-                                open === '2F-Meeting-Win-Together-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[81%] top-[45%] w-[17.8%] h-[15%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                        <div
-                            onClick={() => setOpen('2F-Meeting-Passion-AP')}
-                            data-note='2F-Meeting-Passion-AP'
-                            className={`${
-                                open === '2F-Meeting-Passion-AP' &&
-                                'opacity-80 animate-bounce'
-                            } absolute bg-white rounded opacity-10 left-[80.5%] top-[69%] w-[18.2%] h-[8.5%] hover:opacity-80 hover:scale-100 transition-all flex justify-center items-center`}
-                        >
-                            <span
-                                className={`absolute inline-flex h-[100%] w-[100%] rounded bg-gray-200 hover:animate-ping hover:opacity-100`}
-                            />
-                        </div>
-                    </section>
-                    <section id='studio'>
-                        {/* <MapLocationComponent
-                            name='2F-Studio-AP'
-                            size={{
-                                left: '10.5%',
-                                top: '84%',
-                                width: '23%',
-                                height: '13.5%',
-                            }}
-                            data={filteredData}
-                            active={open}
-                            handleClick={(value) => setOpen(value)}
-                        /> */}
-                    </section>
+                data={data || []}
+            />
+            {isLoading && (
+                <div className='w-full h-[50vh] flex justify-center items-center'>
+                    <LoadingComponent message='Fetching map data ...' />
                 </div>
-            </div>
+            )}
+            {data && !isLoading && (
+                <div className='relative z-0 h-[80%] w-[73%]'>
+                    <img
+                        src={SecondFloorMap}
+                        draggable='false'
+                        className='z-10 h-full w-full'
+                    />
+                    <div
+                        id='overlay'
+                        className='absolute top-0 z-20 w-full h-full'
+                    >
+                        <section id='wide-deck'>
+                            <MapLocationComponent
+                                name='2F Wide Deck'
+                                size={{
+                                    left: '1%',
+                                    top: '1.7%',
+                                    width: '38.5%',
+                                    height: '24%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                        <section id='team-lounge'>
+                            <MapLocationComponent
+                                name='2F Team Lounge West'
+                                size={{
+                                    left: '1%',
+                                    top: '28%',
+                                    width: '27%',
+                                    height: '40%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                            <MapLocationComponent
+                                name='2F Team Lounge East'
+                                size={{
+                                    left: '28.5%',
+                                    top: '28%',
+                                    width: '35%',
+                                    height: '40%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                        <section id='small-deck'>
+                            <MapLocationComponent
+                                name='2F Small Deck'
+                                size={{
+                                    left: '50.5%',
+                                    top: '50%',
+                                    width: '13.5%',
+                                    height: '26%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                        <section id='cafe-area'>
+                            <MapLocationComponent
+                                name='2F Cafe Area'
+                                size={{
+                                    left: '70%',
+                                    top: '21%',
+                                    width: '28.5%',
+                                    height: '22.5%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                        <section id='internal-meeting-rooms'>
+                            <MapLocationComponent
+                                name='2F Internal Meeting Rooms'
+                                size={{
+                                    left: '70%',
+                                    top: '45%',
+                                    width: '28.5%',
+                                    height: '32.5%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                        <section id='studio'>
+                            <MapLocationComponent
+                                name='2F-Studio'
+                                size={{
+                                    left: '10.5%',
+                                    top: '84%',
+                                    width: '23%',
+                                    height: '13.5%',
+                                }}
+                                data={data}
+                                active={open}
+                                handleClick={(value) => setOpen(value)}
+                            />
+                        </section>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
