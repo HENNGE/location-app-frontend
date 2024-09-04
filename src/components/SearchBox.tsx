@@ -3,24 +3,21 @@ import {
     Autocomplete,
     AutocompleteProps,
     Avatar,
-    Button,
     ComboboxItem,
-    Dialog,
     Group,
     Loader,
     OptionsFilter,
     rem,
     Text,
-    TextInput,
 } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconSearch, IconUsersGroup, IconX } from '@tabler/icons-react';
-import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
+import SearchDialogBox from './SearchDialog';
 
 const SearchBox = () => {
     const [value, setValue] = useState<string>('');
@@ -123,40 +120,48 @@ const SearchBox = () => {
     return (
         <>
             {casvalLocation && (
-                <Dialog
-                    opened={!!queryMember}
-                    withCloseButton
-                    onClose={() => {
+                // <Dialog
+                //     opened={!!queryMember}
+                //     withCloseButton
+                //     onClose={() => {
+                //         setQueryMember('');
+                //         setValue('');
+                //     }}
+                //     size='lg'
+                //     radius='md'
+                //     className='border-[1px] border-black'
+                // >
+                //     <Text size='sm' mb='xs' fw={500}>
+                //         {`Last seen: ${DateTime.fromISO(
+                //             casvalLocation.last_seen
+                //         ).toISODate()}`}
+                //     </Text>
+                //     <Text size='sm' mb='xs' fw={500}>
+                //         {casvalLocation.area_tags[2].name}
+                //     </Text>
+                //     <Group align='flex-end'>
+                //         <TextInput
+                //             placeholder='hello@gluesticker.com'
+                //             style={{ flex: 1 }}
+                //         />
+                //         <Button onClick={close}>Subscribe</Button>
+                //     </Group>
+                // </Dialog>
+                <SearchDialogBox
+                    open={!!queryMember}
+                    handleClose={() => {
                         setQueryMember('');
                         setValue('');
                     }}
-                    size='lg'
-                    radius='md'
-                    className='border-[1px] border-black'
-                >
-                    <Text size='sm' mb='xs' fw={500}>
-                        {`Last seen: ${DateTime.fromISO(
-                            casvalLocation.last_seen
-                        ).toISODate()}`}
-                    </Text>
-                    <Text size='sm' mb='xs' fw={500}>
-                        {casvalLocation.area_tags[2].name}
-                    </Text>
-                    <Group align='flex-end'>
-                        <TextInput
-                            placeholder='hello@gluesticker.com'
-                            style={{ flex: 1 }}
-                        />
-                        <Button onClick={close}>Subscribe</Button>
-                    </Group>
-                </Dialog>
+                    casvalLocation={casvalLocation}
+                />
             )}
             <Autocomplete
                 aria-label='Search box'
                 value={value}
                 onChange={(value) => setValue(value)}
                 className='w-[22rem]'
-                placeholder='Search user'
+                placeholder='Search user or department ... '
                 leftSection={
                     <IconSearch
                         style={{ width: rem(16), height: rem(16) }}

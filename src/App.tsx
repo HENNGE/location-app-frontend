@@ -78,25 +78,25 @@ const App = (): JSX.Element => {
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-2'
+                                                        path='/level-2/:id?'
                                                         element={
                                                             <SecondFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-4'
+                                                        path='/level-4/:id?'
                                                         element={
                                                             <FourthFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-5'
+                                                        path='/level-5/:id?'
                                                         element={
                                                             <FifthFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-11'
+                                                        path='/level-11/:id?'
                                                         element={
                                                             <EleventhFloorPage />
                                                         }
