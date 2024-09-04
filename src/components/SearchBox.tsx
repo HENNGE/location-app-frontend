@@ -14,12 +14,12 @@ import {
     TextInput,
 } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
-import { IconSearch, IconX } from '@tabler/icons-react';
+import { IconSearch, IconUsersGroup, IconX } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
-import { KasvotMember } from '../types/kasvot.types';
+import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
 
 const SearchBox = () => {
@@ -27,11 +27,20 @@ const SearchBox = () => {
     const [debounced] = useDebouncedValue(value, 250);
     const [queryMember, setQueryMember] = useState('');
 
-    const { data: members, isLoading } = useSWR<{
+    const { data: members, isLoading: isLoadingMembers } = useSWR<{
         member: KasvotMember[];
     }>(
         debounced
             ? `query{member(name: "${debounced.toLowerCase()}"){id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`
+            : '',
+        kasvotFetcher
+    );
+
+    const { data: departments, isLoading: isLoadingDepartments } = useSWR<{
+        department: KasvotDepartment[];
+    }>(
+        debounced
+            ? `query{department(name: "${debounced.toLowerCase()}", active: "Y"){id name}}`
             : '',
         kasvotFetcher
     );
@@ -42,11 +51,27 @@ const SearchBox = () => {
             fetcher<CasvalUserLocation>(endpoint, { email: email })
     );
 
+    const optionsData = useMemo(() => {
+        if (members && departments) {
+            const combinedData = [...members.member, ...departments.department];
+
+            return [
+                ...new Set(
+                    combinedData.map((queryData) => queryData.name || '')
+                ),
+            ];
+        }
+    }, [members, departments]);
+
     const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
         option,
     }) => {
         const member = members?.member.find(
             (member) => member.name === option.value
+        );
+
+        const department = departments?.department.find(
+            (dept) => dept.name === option.value
         );
 
         if (member) {
@@ -55,7 +80,12 @@ const SearchBox = () => {
                     gap='sm'
                     onClick={() => setQueryMember(member.email || '')}
                 >
-                    <Avatar src={member.imgUrl} size={36} radius='xl' />
+                    <Avatar
+                        src={member.imgUrl}
+                        size={36}
+                        radius='xl'
+                        alt='Kasvot user images'
+                    />
                     <div>
                         <Text size='sm'>{option.value}</Text>
                         <Text size='xs' opacity={0.5}>
@@ -64,10 +94,21 @@ const SearchBox = () => {
                     </div>
                 </Group>
             );
+        } else if (department) {
+            return (
+                <Group gap='sm' className='flex flex-row'>
+                    <Avatar size={36} radius='xl'>
+                        <IconUsersGroup />
+                    </Avatar>
+                    <div className='flex max-w-64'>
+                        <Text size='sm'>{option.value}</Text>
+                    </div>
+                </Group>
+            );
         }
     };
 
-    const optionsFilter: OptionsFilter = ({ options, search }) => {
+    const optionsFilter: OptionsFilter = useCallback(({ options, search }) => {
         const filtered = (options as ComboboxItem[]).filter((option) =>
             option.label
                 .toLowerCase()
@@ -77,8 +118,8 @@ const SearchBox = () => {
 
         filtered.sort((a, b) => a.label.localeCompare(b.label));
         return filtered;
-    };
-    console.log(111, casvalLocation);
+    }, []);
+
     return (
         <>
             {casvalLocation && (
@@ -123,7 +164,9 @@ const SearchBox = () => {
                     />
                 }
                 rightSection={
-                    isLoading || casvalLoading ? (
+                    isLoadingMembers ||
+                    casvalLoading ||
+                    isLoadingDepartments ? (
                         <Loader size={18} />
                     ) : (
                         <ActionIcon
@@ -137,11 +180,7 @@ const SearchBox = () => {
                         </ActionIcon>
                     )
                 }
-                data={
-                    (members &&
-                        members.member.map((member) => member.name || '')) ||
-                    []
-                }
+                data={optionsData}
                 renderOption={renderAutocompleteOption}
                 filter={optionsFilter}
                 visibleFrom='md'
