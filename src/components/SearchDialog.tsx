@@ -3,16 +3,17 @@ import { IconDirectionSign } from '@tabler/icons-react';
 import { DateTime, Duration } from 'luxon';
 import { useMemo } from 'react';
 import { CasvalUserLocation } from '../types/casval.types';
+import { KasvotMember } from '../types/kasvot.types';
 
 interface Props {
-    name: string;
+    member: KasvotMember | undefined;
     open: boolean;
     handleClose: () => void;
     casvalLocation: CasvalUserLocation;
 }
 
 const SearchDialogBox = ({
-    name,
+    member,
     open,
     handleClose,
     casvalLocation,
@@ -31,7 +32,7 @@ const SearchDialogBox = ({
             onClose={handleClose}
             size='xs'
             radius='md'
-            title={`Search result: ${name}`}
+            title={`Search result: ${member?.name}`}
             overlayProps={{
                 backgroundOpacity: 0.5,
                 blur: 5,
@@ -39,7 +40,7 @@ const SearchDialogBox = ({
             withCloseButton={false}
         >
             <FocusTrap.InitialFocus />
-            {casvalLocation.last_seen && timeDifference.hours < 1 && (
+            {casvalLocation.last_seen && timeDifference.hours < 1 && member && (
                 <Group className='flex flex-col items-start p-2'>
                     {casvalLocation.area_tags && (
                         <Group>
@@ -53,7 +54,7 @@ const SearchDialogBox = ({
                                 color='#003366'
                                 onClick={() =>
                                     window.location.replace(
-                                        `/level-${casvalLocation.area_tags[2].name[0]}/${casvalLocation.name}`
+                                        `/level-${casvalLocation.area_tags[2].name[0]}/${member.email}`
                                     )
                                 }
                             >

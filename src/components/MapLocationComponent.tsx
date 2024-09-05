@@ -13,7 +13,7 @@ interface Props {
     data: FetchedCasvalData[];
     active: string;
     handleClick: (value: string) => void;
-    alert?: string | undefined;
+    userEmail?: string | undefined;
 }
 
 const MapLocationComponent = ({
@@ -22,7 +22,7 @@ const MapLocationComponent = ({
     data,
     active,
     handleClick,
-    alert,
+    userEmail,
 }: Props) => {
     const [filteredData] = data.filter(
         (fetchedData) => fetchedData.areaTag.name === name
@@ -31,6 +31,18 @@ const MapLocationComponent = ({
     const userCount = useMemo(() => {
         return getCountIcon(filteredData ? filteredData.users.length : 0);
     }, [filteredData]);
+
+    const userInGroup = useMemo(() => {
+        if (userEmail) {
+            const user = filteredData.users.find(
+                (user) => user.email === userEmail
+            );
+            if (user) {
+                return true;
+            }
+        }
+        return false;
+    }, [filteredData, userEmail]);
 
     return (
         <div
@@ -43,7 +55,9 @@ const MapLocationComponent = ({
                 height: size.height,
             }}
             className={`${
-                alert && !!alert && '!opacity-100 !border-[3px] !border-white'
+                userInGroup &&
+                !!userInGroup &&
+                '!opacity-100 !border-[3px] !border-white'
             } ${
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
@@ -57,8 +71,8 @@ const MapLocationComponent = ({
                 <img
                     src={userCount}
                     className={`${
-                        alert &&
-                        !!alert &&
+                        userInGroup &&
+                        !!userInGroup &&
                         'animate-wiggle-more animate-infinite'
                     } h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
                     alt='user count icon'

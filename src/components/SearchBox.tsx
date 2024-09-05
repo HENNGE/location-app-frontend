@@ -155,12 +155,11 @@ const SearchBox = () => {
             />
             {casvalLocation && (
                 <SearchDialogBox
-                    name={
-                        (members &&
-                            members.member.find(
-                                (member) => member.email === queryMember
-                            )?.name) ||
-                        ''
+                    member={
+                        members &&
+                        members.member.find(
+                            (member) => member.email === queryMember
+                        )
                     }
                     open={!!queryMember}
                     handleClose={() => {

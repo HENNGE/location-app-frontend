@@ -11,7 +11,8 @@ import { fetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const FourthFloorPage = (): JSX.Element => {
-    const tempState = useTemporaryState(useParams().id);
+    // user email if querying user, which times out
+    const userEmail = useTemporaryState(useParams().id);
 
     const [open, setOpen] = useState('');
 
@@ -59,7 +60,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
-                                alert={tempState}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Lounge Center'
@@ -72,6 +73,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Lounge High Table'
@@ -84,6 +86,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Lab'
@@ -96,6 +99,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='forest-area'>
@@ -110,6 +114,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Cabinets'
@@ -122,6 +127,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Lockers'
@@ -134,6 +140,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Center Window-side'
@@ -146,6 +153,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Center'
@@ -158,6 +166,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Walkway Center'
@@ -170,6 +179,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Hallway Window-side'
@@ -182,6 +192,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Hallway Door'
@@ -194,6 +205,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='4F Forest Walkway Delivery Room'
@@ -206,6 +218,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                     </div>
