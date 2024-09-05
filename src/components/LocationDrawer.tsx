@@ -6,19 +6,22 @@ import {
     Text,
 } from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
-import useSWR from 'swr';
 import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
-import { kasvotFetcher } from '../utilities/utilities';
-import LoadingComponent from './LoadingComponent';
 
 interface Props {
     open: string;
     handleOpen: (value: string) => void;
     data: FetchedCasvalData[];
+    members: KasvotMember[] | undefined;
 }
 
-const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
+const LocationDrawer = ({
+    data,
+    open,
+    handleOpen,
+    members,
+}: Props): JSX.Element => {
     const [searchQuery, setSearchQuery] = useState('');
     const [drawerPosition, setDrawerPosition] =
         useState<DrawerRootProps['position']>('left');
@@ -50,25 +53,30 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         return [];
     }, [data, open]);
 
-    const { data: members, isLoading } = useSWR(filteredData, (users) => {
-        return Promise.all(
-            users.map(async (user) => {
-                const { member } = await kasvotFetcher<{
-                    member: KasvotMember[];
-                }>(
-                    `query{member(email: "${user.email}"){id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`
-                );
+    const filteredMembers = useMemo(() => {
+        if (!members) {
+            return [];
+        }
 
-                return member[0];
-            })
-        );
-    });
+        const output: KasvotMember[] = [];
+
+        members.forEach((member) => {
+            const user = filteredData.find(
+                (user) => user.email === member.email
+            );
+            if (user) {
+                output.push(member);
+            }
+        });
+
+        return output;
+    }, [members, filteredData]);
 
     const filteredSearch = useMemo(() => {
         const output: KasvotMember[] = [];
 
-        if (members) {
-            members.forEach((member) => {
+        if (filteredMembers) {
+            filteredMembers.forEach((member) => {
                 if (
                     member.name &&
                     member.name
@@ -80,7 +88,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             });
         }
         return output;
-    }, [members, searchQuery]);
+    }, [filteredMembers, searchQuery]);
 
     return (
         <Drawer
@@ -96,12 +104,7 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         >
             <FocusTrap.InitialFocus />
             <div className='h-full w-[17rem]'>
-                {isLoading && (
-                    <div className='w-full h-[50vh] flex justify-center items-center'>
-                        <LoadingComponent message='Fetching user list ...' />
-                    </div>
-                )}
-                {!isLoading && (
+                {filteredSearch && (
                     <>
                         <Autocomplete
                             className='w-[17rem]'

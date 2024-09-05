@@ -4,7 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Cache } from 'aws-amplify/utils';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { SWRConfig } from 'swr';
+import { preload, SWRConfig } from 'swr';
 import AuthWrapper from './components/AuthWrapper';
 import Header from './components/Header';
 import LoadingComponent from './components/LoadingComponent';
@@ -14,6 +14,12 @@ import FifthFloorPage from './pages/FifthFloorPage';
 import FourthFloorPage from './pages/FourthFloorPage';
 import NotFoundPage from './pages/NotFoundPage';
 import SecondFloorPage from './pages/SecondFloorPage';
+import { kasvotFetcher } from './utilities/utilities';
+
+preload(
+    `query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`,
+    kasvotFetcher
+);
 
 const App = (): JSX.Element => {
     const [opened, { toggle }] = useDisclosure();

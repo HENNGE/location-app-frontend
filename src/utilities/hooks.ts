@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export const useTemporaryState = (
     initialValue: string | undefined,
-    duration = 10000
+    duration = 8000
 ) => {
     const [state, setState] = useState(initialValue);
 

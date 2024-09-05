@@ -1,3 +1,4 @@
+import { Avatar, Tooltip } from '@mantine/core';
 import { useMemo } from 'react';
 import { FetchedCasvalData } from '../types/casval.types';
 import { getCountIcon } from '../utilities/utilities';
@@ -45,40 +46,42 @@ const MapLocationComponent = ({
     }, [filteredData, userEmail]);
 
     return (
-        <div
-            onClick={() => handleClick(name)}
-            data-note={name}
-            style={{
-                left: size.left,
-                top: size.top,
-                width: size.width,
-                height: size.height,
-            }}
-            className={`${
-                userInGroup &&
-                !!userInGroup &&
-                '!opacity-100 !border-[3px] !border-white'
-            } ${
-                active === name
-                    ? 'opacity-100 border-[3px] border-white animate-pulse'
-                    : 'opacity-25'
-            } absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:opacity-100 cursor-pointer`}
-            tabIndex={0}
-            role='button'
-            aria-label={`${name} area button`}
-        >
-            {userCount && (
-                <img
-                    src={userCount}
-                    className={`${
-                        userInGroup &&
-                        !!userInGroup &&
-                        'animate-wiggle-more animate-infinite'
-                    } h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
-                    alt='user count icon'
-                />
-            )}
-        </div>
+        <Tooltip label={<Avatar.Group>test</Avatar.Group>}>
+            <div
+                onClick={() => handleClick(name)}
+                data-note={name}
+                style={{
+                    left: size.left,
+                    top: size.top,
+                    width: size.width,
+                    height: size.height,
+                }}
+                className={`${
+                    userInGroup &&
+                    !!userInGroup &&
+                    '!opacity-100 !border-[3px] !border-white'
+                } ${
+                    active === name
+                        ? 'opacity-100 border-[3px] border-white animate-pulse'
+                        : 'opacity-25'
+                } absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:opacity-100 cursor-pointer`}
+                tabIndex={0}
+                role='button'
+                aria-label={`${name} area button`}
+            >
+                {userCount && (
+                    <img
+                        src={userCount}
+                        className={`${
+                            userInGroup &&
+                            !!userInGroup &&
+                            'animate-wiggle-more animate-infinite'
+                        } h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
+                        alt='user count icon'
+                    />
+                )}
+            </div>
+        </Tooltip>
     );
 };
 

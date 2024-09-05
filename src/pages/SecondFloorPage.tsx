@@ -5,7 +5,8 @@ import LoadingComponent from '../components/LoadingComponent';
 import LocationDrawer from '../components/LocationDrawer';
 import MapLocationComponent from '../components/MapLocationComponent';
 import { FetchedCasvalData } from '../types/casval.types';
-import { fetcher } from '../utilities/utilities';
+import { KasvotMember } from '../types/kasvot.types';
+import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const SecondFloorPage = (): JSX.Element => {
@@ -14,6 +15,11 @@ const SecondFloorPage = (): JSX.Element => {
     const { data, isLoading, error } = useSWR(
         '/location-info/2F',
         fetcher<FetchedCasvalData[]>
+    );
+
+    const { data: kasvotMembers } = useSWR(
+        `query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`,
+        kasvotFetcher<{ member: KasvotMember[] }>
     );
 
     if (error) {
@@ -26,6 +32,7 @@ const SecondFloorPage = (): JSX.Element => {
                 open={open}
                 handleOpen={(value) => setOpen(value)}
                 data={data || []}
+                members={kasvotMembers?.member}
             />
             {isLoading && (
                 <div className='w-full h-[50vh] flex justify-center items-center'>
