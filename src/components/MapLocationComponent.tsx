@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { FetchedCasvalData } from '../types/casval.types';
 import { getCountIcon } from '../utilities/utilities';
 
@@ -25,6 +26,10 @@ const MapLocationComponent = ({
         (fetchedData) => fetchedData.areaTag.name === name
     );
 
+    const userCount = useMemo(() => {
+        return getCountIcon(filteredData ? filteredData.users.length : 0);
+    }, [filteredData]);
+
     return (
         <div
             onClick={() => handleClick(name)}
@@ -38,13 +43,19 @@ const MapLocationComponent = ({
             className={`${
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
-                    : 'opacity-100'
-            } absolute rounded-lghover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:animate-pulse cursor-pointer`}
+                    : 'opacity-25'
+            } absolute rounded-lghover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:opacity-100 cursor-pointer`}
+            tabIndex={0}
+            role='button'
+            aria-label={`${name} area button`}
         >
-            <img
-                src={getCountIcon(filteredData ? filteredData.users.length : 0)}
-                className='h-[5rem] w-auto'
-            />
+            {userCount && (
+                <img
+                    src={userCount}
+                    className='h-[5rem] w-auto bg-white rounded-full border-[1px] border-black'
+                    alt='user count icon'
+                />
+            )}
         </div>
     );
 };

@@ -119,43 +119,6 @@ const SearchBox = () => {
 
     return (
         <>
-            {casvalLocation && (
-                // <Dialog
-                //     opened={!!queryMember}
-                //     withCloseButton
-                //     onClose={() => {
-                //         setQueryMember('');
-                //         setValue('');
-                //     }}
-                //     size='lg'
-                //     radius='md'
-                //     className='border-[1px] border-black'
-                // >
-                //     <Text size='sm' mb='xs' fw={500}>
-                //         {`Last seen: ${DateTime.fromISO(
-                //             casvalLocation.last_seen
-                //         ).toISODate()}`}
-                //     </Text>
-                //     <Text size='sm' mb='xs' fw={500}>
-                //         {casvalLocation.area_tags[2].name}
-                //     </Text>
-                //     <Group align='flex-end'>
-                //         <TextInput
-                //             placeholder='hello@gluesticker.com'
-                //             style={{ flex: 1 }}
-                //         />
-                //         <Button onClick={close}>Subscribe</Button>
-                //     </Group>
-                // </Dialog>
-                <SearchDialogBox
-                    open={!!queryMember}
-                    handleClose={() => {
-                        setQueryMember('');
-                        setValue('');
-                    }}
-                    casvalLocation={casvalLocation}
-                />
-            )}
             <Autocomplete
                 aria-label='Search box'
                 value={value}
@@ -190,6 +153,16 @@ const SearchBox = () => {
                 filter={optionsFilter}
                 visibleFrom='md'
             />
+            {casvalLocation && (
+                <SearchDialogBox
+                    open={!!queryMember}
+                    handleClose={() => {
+                        setQueryMember('');
+                        setValue('');
+                    }}
+                    casvalLocation={casvalLocation}
+                />
+            )}
         </>
     );
 };
