@@ -1,6 +1,7 @@
 import { Avatar, Tooltip } from '@mantine/core';
 import { useMemo } from 'react';
 import { FetchedCasvalData } from '../types/casval.types';
+import { KasvotMember } from '../types/kasvot.types';
 import { getCountIcon } from '../utilities/utilities';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
     active: string;
     handleClick: (value: string) => void;
     userEmail?: string | undefined;
+    members?: KasvotMember[] | undefined;
 }
 
 const MapLocationComponent = ({
@@ -24,10 +26,11 @@ const MapLocationComponent = ({
     active,
     handleClick,
     userEmail,
+    members,
 }: Props) => {
-    const [filteredData] = data.filter(
-        (fetchedData) => fetchedData.areaTag.name === name
-    );
+    const [filteredData] = useMemo(() => {
+        return data.filter((fetchedData) => fetchedData.areaTag.name === name);
+    }, [data, name]);
 
     const userCount = useMemo(() => {
         return getCountIcon(filteredData ? filteredData.users.length : 0);
@@ -45,8 +48,45 @@ const MapLocationComponent = ({
         return false;
     }, [filteredData, userEmail]);
 
+    const avatars = useMemo(() => {
+        if (!members) {
+            return [];
+        }
+
+        const output: KasvotMember[] = [];
+
+        members.forEach((member) => {
+            const user = filteredData.users.find(
+                (user) => user.email === member.email
+            );
+            if (user) {
+                output.push(member);
+            }
+        });
+
+        if (output.length < 4) {
+            return (
+                <>
+                    {output.map((user) => (
+                        <Avatar src={user.imgUrl} />
+                    ))}
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Avatar src={output[0].imgUrl} />
+                    <Avatar src={output[1].imgUrl} />
+                    <Avatar src={output[2].imgUrl} />
+                    <Avatar src={output[3].imgUrl} />
+                    <Avatar>+{output.length - 4}</Avatar>
+                </>
+            );
+        }
+    }, [filteredData, members]);
+
     return (
-        <Tooltip label={<Avatar.Group>test</Avatar.Group>}>
+        <Tooltip label={<Avatar.Group>{avatars}</Avatar.Group>}>
             <div
                 onClick={() => handleClick(name)}
                 data-note={name}

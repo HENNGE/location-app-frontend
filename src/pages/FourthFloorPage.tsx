@@ -68,6 +68,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Lounge Center'
@@ -81,6 +82,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Lounge High Table'
@@ -94,6 +96,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Lab'
@@ -107,6 +110,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                         </section>
                         <section id='forest-area'>
@@ -122,6 +126,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Cabinets'
@@ -135,6 +140,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Lockers'
@@ -148,6 +154,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Center Window-side'
@@ -161,6 +168,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Center'
@@ -174,6 +182,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Walkway Center'
@@ -187,6 +196,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Hallway Window-side'
@@ -200,6 +210,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Hallway Door'
@@ -213,6 +224,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                             <MapLocationComponent
                                 name='4F Forest Walkway Delivery Room'
@@ -226,6 +238,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                         </section>
                     </div>
