@@ -13,6 +13,7 @@ interface Props {
     data: FetchedCasvalData[];
     active: string;
     handleClick: (value: string) => void;
+    alert?: string | undefined;
 }
 
 const MapLocationComponent = ({
@@ -21,6 +22,7 @@ const MapLocationComponent = ({
     data,
     active,
     handleClick,
+    alert,
 }: Props) => {
     const [filteredData] = data.filter(
         (fetchedData) => fetchedData.areaTag.name === name
@@ -40,11 +42,11 @@ const MapLocationComponent = ({
                 width: size.width,
                 height: size.height,
             }}
-            className={`${
+            className={`${alert && !!alert && '!opacity-100'} ${
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-25'
-            } absolute rounded-lghover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:opacity-100 cursor-pointer`}
+            } absolute rounded-lg hover:scale-95 transition-all flex justify-center items-center hover:border-[3px] hover:border-white hover:opacity-100 cursor-pointer`}
             tabIndex={0}
             role='button'
             aria-label={`${name} area button`}
@@ -52,7 +54,11 @@ const MapLocationComponent = ({
             {userCount && (
                 <img
                     src={userCount}
-                    className='h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]'
+                    className={`${
+                        alert &&
+                        !!alert &&
+                        'animate-wiggle-more animate-infinite'
+                    } h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
                     alt='user count icon'
                 />
             )}

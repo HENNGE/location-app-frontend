@@ -51,6 +51,11 @@ const SearchDialogBox = ({
                                 variant='filled'
                                 size='lg'
                                 color='#003366'
+                                onClick={() =>
+                                    window.location.replace(
+                                        `/level-${casvalLocation.area_tags[2].name[0]}/${casvalLocation.name}`
+                                    )
+                                }
                             >
                                 <IconDirectionSign />
                             </ActionIcon>

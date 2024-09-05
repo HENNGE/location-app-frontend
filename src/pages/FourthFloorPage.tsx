@@ -1,14 +1,18 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import FourthFloorMap from '../assets/4F-map.png';
 import LoadingComponent from '../components/LoadingComponent';
 import LocationDrawer from '../components/LocationDrawer';
 import MapLocationComponent from '../components/MapLocationComponent';
 import { FetchedCasvalData } from '../types/casval.types';
+import { useTemporaryState } from '../utilities/hooks';
 import { fetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const FourthFloorPage = (): JSX.Element => {
+    const tempState = useTemporaryState(useParams().id);
+
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
@@ -55,6 +59,7 @@ const FourthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                alert={tempState}
                             />
                             <MapLocationComponent
                                 name='4F Lounge Center'
