@@ -52,7 +52,7 @@ const MapLocationComponent = ({
             {userCount && (
                 <img
                     src={userCount}
-                    className='h-[5rem] w-auto bg-white rounded-full border-[1px] border-black'
+                    className='h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]'
                     alt='user count icon'
                 />
             )}

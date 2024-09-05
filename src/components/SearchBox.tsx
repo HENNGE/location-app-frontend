@@ -21,8 +21,8 @@ import SearchDialogBox from './SearchDialog';
 
 const SearchBox = () => {
     const [value, setValue] = useState<string>('');
-    const [debounced] = useDebouncedValue(value, 250);
-    const [queryMember, setQueryMember] = useState('');
+    const [debounced] = useDebouncedValue<string>(value, 250);
+    const [queryMember, setQueryMember] = useState<string>('');
 
     const { data: members, isLoading: isLoadingMembers } = useSWR<{
         member: KasvotMember[];
@@ -155,6 +155,13 @@ const SearchBox = () => {
             />
             {casvalLocation && (
                 <SearchDialogBox
+                    name={
+                        (members &&
+                            members.member.find(
+                                (member) => member.email === queryMember
+                            )?.name) ||
+                        ''
+                    }
                     open={!!queryMember}
                     handleClose={() => {
                         setQueryMember('');

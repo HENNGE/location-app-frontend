@@ -1,4 +1,10 @@
-import { Autocomplete, Drawer, DrawerRootProps, Text } from '@mantine/core';
+import {
+    Autocomplete,
+    Drawer,
+    DrawerRootProps,
+    FocusTrap,
+    Text,
+} from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { FetchedCasvalData } from '../types/casval.types';
@@ -85,8 +91,10 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             radius='md'
             size='xs'
             title={open}
+            closeButtonProps={{ 'aria-label': 'Close drawer' }}
             overlayProps={{ backgroundOpacity: 0.25, blur: 0 }}
         >
+            <FocusTrap.InitialFocus />
             <div className='h-full w-[17rem]'>
                 {isLoading && (
                     <div className='w-full h-[50vh] flex justify-center items-center'>
