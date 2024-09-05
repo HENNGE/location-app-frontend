@@ -42,7 +42,9 @@ const MapLocationComponent = ({
                 width: size.width,
                 height: size.height,
             }}
-            className={`${alert && !!alert && '!opacity-100'} ${
+            className={`${
+                alert && !!alert && '!opacity-100 !border-[3px] !border-white'
+            } ${
                 active === name
                     ? 'opacity-100 border-[3px] border-white animate-pulse'
                     : 'opacity-25'
