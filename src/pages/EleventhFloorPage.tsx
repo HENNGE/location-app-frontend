@@ -20,7 +20,7 @@ const EleventhFloorPage = (): JSX.Element => {
         fetcher<FetchedCasvalData[]>
     );
 
-    const { data: kasvotMembers } = useSWR(
+    const { data: kasvotMembers, isLoading: kasvotMembersLoading } = useSWR(
         `query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`,
         kasvotFetcher<{ member: KasvotMember[] }>
     );
@@ -37,12 +37,12 @@ const EleventhFloorPage = (): JSX.Element => {
                 data={data || []}
                 members={kasvotMembers?.member}
             />
-            {isLoading && (
+            {(isLoading || kasvotMembersLoading) && (
                 <div className='w-full h-[50vh] flex justify-center items-center'>
                     <LoadingComponent message='Fetching map data ...' />
                 </div>
             )}
-            {data && !isLoading && (
+            {data && kasvotMembers && !isLoading && !kasvotMembersLoading && (
                 <div className='relative z-0 h-[80%] w-[61%]'>
                     <img
                         src={EleventhFloorMap}
@@ -66,7 +66,7 @@ const EleventhFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='open-lounge'>
@@ -82,7 +82,7 @@ const EleventhFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                     </div>

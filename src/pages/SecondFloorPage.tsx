@@ -20,7 +20,7 @@ const SecondFloorPage = (): JSX.Element => {
         fetcher<FetchedCasvalData[]>
     );
 
-    const { data: kasvotMembers } = useSWR(
+    const { data: kasvotMembers, isLoading: kasvotMembersLoading } = useSWR(
         `query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`,
         kasvotFetcher<{ member: KasvotMember[] }>
     );
@@ -37,12 +37,12 @@ const SecondFloorPage = (): JSX.Element => {
                 data={data || []}
                 members={kasvotMembers?.member}
             />
-            {isLoading && (
+            {(isLoading || kasvotMembersLoading) && (
                 <div className='w-full h-[50vh] flex justify-center items-center'>
                     <LoadingComponent message='Fetching map data ...' />
                 </div>
             )}
-            {data && !isLoading && (
+            {data && kasvotMembers && !isLoading && !kasvotMembersLoading && (
                 <div className='relative z-0 h-[80%] w-[73%]'>
                     <img
                         src={SecondFloorMap}
@@ -66,7 +66,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='team-lounge'>
@@ -82,7 +82,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                             <MapLocationComponent
                                 name='2F Team Lounge East'
@@ -96,7 +96,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='small-deck'>
@@ -112,7 +112,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='cafe-area'>
@@ -128,7 +128,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='internal-meeting-rooms'>
@@ -144,7 +144,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                         <section id='studio'>
@@ -160,7 +160,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
-                                members={kasvotMembers?.member}
+                                members={kasvotMembers.member}
                             />
                         </section>
                     </div>

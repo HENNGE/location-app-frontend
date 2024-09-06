@@ -32,9 +32,9 @@ const MapLocationComponent = ({
         return data.filter((fetchedData) => fetchedData.areaTag.name === name);
     }, [data, name]);
 
-    const userCount = useMemo(() => {
-        return getCountIcon(filteredData ? filteredData.users.length : 0);
-    }, [filteredData]);
+    const userCount = getCountIcon(
+        filteredData ? filteredData.users.length : 0
+    );
 
     const userInGroup = useMemo(() => {
         if (userEmail && filteredData) {
@@ -63,6 +63,8 @@ const MapLocationComponent = ({
                 output.push(member);
             }
         });
+
+        output.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
         if (output.length <= 4) {
             return (

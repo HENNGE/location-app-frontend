@@ -54,7 +54,7 @@ const LocationDrawer = ({
     }, [data, open]);
 
     const filteredMembers = useMemo(() => {
-        if (!members) {
+        if (!members || !Array.isArray(members)) {
             return [];
         }
 
@@ -69,7 +69,9 @@ const LocationDrawer = ({
             }
         });
 
-        return output;
+        return output.sort((a, b) =>
+            (a.name || '').localeCompare(b.name || '')
+        );
     }, [members, filteredData]);
 
     const filteredSearch = useMemo(() => {
