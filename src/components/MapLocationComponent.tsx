@@ -16,7 +16,7 @@ interface Props {
     active: string;
     handleClick: (value: string) => void;
     userEmail?: string | undefined;
-    members?: KasvotMember[] | undefined;
+    members: KasvotMember[] | undefined;
 }
 
 const MapLocationComponent = ({
@@ -49,7 +49,7 @@ const MapLocationComponent = ({
     }, [filteredData, userEmail]);
 
     const avatars = useMemo(() => {
-        if (!members) {
+        if (!members || !filteredData) {
             return [];
         }
 
@@ -86,7 +86,12 @@ const MapLocationComponent = ({
     }, [filteredData, members]);
 
     return (
-        <Tooltip label={<Avatar.Group>{avatars}</Avatar.Group>}>
+        <Tooltip
+            label={<Avatar.Group>{avatars}</Avatar.Group>}
+            className='bg-transparent'
+            transitionProps={{ transition: 'pop', duration: 300 }}
+            offset={-16}
+        >
             <div
                 onClick={() => handleClick(name)}
                 data-note={name}
@@ -116,7 +121,7 @@ const MapLocationComponent = ({
                             userInGroup &&
                             !!userInGroup &&
                             'animate-wiggle-more animate-infinite'
-                        } h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
+                        } sm:h-[5rem] w-auto bg-white rounded-full border-[1px] border-[#003366]`}
                         alt='user count icon'
                     />
                 )}

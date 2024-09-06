@@ -12,12 +12,7 @@ interface Props {
     casvalLocation: CasvalUserLocation;
 }
 
-const SearchDialogBox = ({
-    member,
-    open,
-    handleClose,
-    casvalLocation,
-}: Props) => {
+const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
     const timeDifference: Duration<true> = useMemo(() => {
         const parsedDate = DateTime.fromISO(casvalLocation.last_seen || '');
 
@@ -30,7 +25,7 @@ const SearchDialogBox = ({
         <Modal
             opened={open}
             onClose={handleClose}
-            size='xs'
+            size='sm'
             radius='md'
             title={`Search result`}
             overlayProps={{
@@ -43,7 +38,7 @@ const SearchDialogBox = ({
             {casvalLocation.last_seen && timeDifference.hours < 1 && member && (
                 <Group className='flex flex-col items-start p-2 border-[1px] rounded-md'>
                     <div>
-                        <Text size='md' fw={600}>
+                        <Text size='xl' fw={600}>
                             {member.name}
                         </Text>
                         <Text size='sm' c='dimmed'>
@@ -102,4 +97,4 @@ const SearchDialogBox = ({
     );
 };
 
-export default SearchDialogBox;
+export default SearchModal;

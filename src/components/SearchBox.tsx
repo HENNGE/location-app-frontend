@@ -17,7 +17,7 @@ import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
-import SearchDialogBox from './SearchDialog';
+import SearchModal from './SearchModal';
 
 const SearchBox = () => {
     const [value, setValue] = useState<string>('');
@@ -154,7 +154,7 @@ const SearchBox = () => {
                 visibleFrom='md'
             />
             {casvalLocation && (
-                <SearchDialogBox
+                <SearchModal
                     member={
                         members &&
                         members.member.find(

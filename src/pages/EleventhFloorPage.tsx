@@ -7,12 +7,12 @@ import LocationDrawer from '../components/LocationDrawer';
 import MapLocationComponent from '../components/MapLocationComponent';
 import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
-import { useTemporaryState } from '../utilities/hooks';
+import { useTimeoutState } from '../utilities/hooks';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const EleventhFloorPage = (): JSX.Element => {
-    const userEmail = useTemporaryState(useParams().id);
+    const userEmail = useTimeoutState(useParams().id);
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
@@ -66,6 +66,7 @@ const EleventhFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                         </section>
                         <section id='open-lounge'>
@@ -81,6 +82,7 @@ const EleventhFloorPage = (): JSX.Element => {
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
                                 userEmail={userEmail}
+                                members={kasvotMembers?.member}
                             />
                         </section>
                     </div>
