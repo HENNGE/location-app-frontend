@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import SecondFloorMap from '../assets/2F-map.png';
 import LoadingComponent from '../components/LoadingComponent';
@@ -6,10 +7,12 @@ import LocationDrawer from '../components/LocationDrawer';
 import MapLocationComponent from '../components/MapLocationComponent';
 import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
+import { useTemporaryState } from '../utilities/hooks';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const SecondFloorPage = (): JSX.Element => {
+    const userEmail = useTemporaryState(useParams().id);
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
@@ -62,6 +65,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='team-lounge'>
@@ -76,6 +80,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                             <MapLocationComponent
                                 name='2F Team Lounge East'
@@ -88,6 +93,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='small-deck'>
@@ -102,6 +108,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='cafe-area'>
@@ -116,6 +123,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='internal-meeting-rooms'>
@@ -130,6 +138,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='studio'>
@@ -144,6 +153,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                     </div>

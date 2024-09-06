@@ -37,7 +37,7 @@ const MapLocationComponent = ({
     }, [filteredData]);
 
     const userInGroup = useMemo(() => {
-        if (userEmail) {
+        if (userEmail && filteredData) {
             const user = filteredData.users.find(
                 (user) => user.email === userEmail
             );
@@ -64,7 +64,7 @@ const MapLocationComponent = ({
             }
         });
 
-        if (output.length < 4) {
+        if (output.length <= 4) {
             return (
                 <>
                     {output.map((user) => (

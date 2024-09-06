@@ -32,7 +32,7 @@ const SearchDialogBox = ({
             onClose={handleClose}
             size='xs'
             radius='md'
-            title={`Search result: ${member?.name}`}
+            title={`Search result`}
             overlayProps={{
                 backgroundOpacity: 0.5,
                 blur: 5,
@@ -41,16 +41,27 @@ const SearchDialogBox = ({
         >
             <FocusTrap.InitialFocus />
             {casvalLocation.last_seen && timeDifference.hours < 1 && member && (
-                <Group className='flex flex-col items-start p-2'>
+                <Group className='flex flex-col items-start p-2 border-[1px] rounded-md'>
+                    <div>
+                        <Text size='md' fw={600}>
+                            {member.name}
+                        </Text>
+                        <Text size='sm' c='dimmed'>
+                            {`Last seen: ${Math.floor(
+                                timeDifference.minutes
+                            )} minutes ago`}
+                        </Text>
+                    </div>
+
                     {casvalLocation.area_tags && (
                         <Group>
-                            <Text size='sm' fw={600}>
+                            <Text size='sm'>
                                 {casvalLocation.area_tags[2].name}
                             </Text>
                             <ActionIcon
                                 aria-label='Go to user on map'
                                 variant='filled'
-                                size='lg'
+                                size='md'
                                 color='#003366'
                                 onClick={() =>
                                     window.location.replace(
@@ -62,20 +73,31 @@ const SearchDialogBox = ({
                             </ActionIcon>
                         </Group>
                     )}
-                    <Text size='sm' mb='xs' c='dimmed'>
-                        {`Last seen: ${Math.floor(
-                            timeDifference.minutes
-                        )} minutes ago`}
-                    </Text>
                 </Group>
             )}
-            {(!casvalLocation.last_seen || timeDifference.hours > 1) && (
-                <Group>
-                    <Text size='sm' mb='xs' fw={500}>
-                        User not found in the office
-                    </Text>
-                </Group>
-            )}
+            {(!casvalLocation.last_seen || timeDifference.hours > 1) &&
+                member && (
+                    <Group className='flex flex-col items-start p-2 border-[1px] rounded-md'>
+                        <div>
+                            <Text size='md' fw={600}>
+                                {member.name}
+                            </Text>
+                            {timeDifference.minutes > 0 && (
+                                <Text size='sm' c='dimmed'>
+                                    {`Last seen: ${Math.floor(
+                                        timeDifference.minutes
+                                    )} minutes ago`}
+                                </Text>
+                            )}
+                        </div>
+
+                        <Group>
+                            <Text size='sm' mb='xs' fw={500}>
+                                User not found in the office
+                            </Text>
+                        </Group>
+                    </Group>
+                )}
         </Modal>
     );
 };

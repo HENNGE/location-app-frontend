@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import FifthFloorMap from '../assets/5F-map.png';
 import LoadingComponent from '../components/LoadingComponent';
@@ -6,10 +7,12 @@ import LocationDrawer from '../components/LocationDrawer';
 import MapLocationComponent from '../components/MapLocationComponent';
 import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
+import { useTemporaryState } from '../utilities/hooks';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const FifthFloorPage = (): JSX.Element => {
+    const userEmail = useTemporaryState(useParams().id);
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
@@ -63,6 +66,7 @@ const FifthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='locker-area'>
@@ -77,6 +81,7 @@ const FifthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                         <section id='collaboration-area'>
@@ -91,6 +96,7 @@ const FifthFloorPage = (): JSX.Element => {
                                 data={data}
                                 active={open}
                                 handleClick={(value) => setOpen(value)}
+                                userEmail={userEmail}
                             />
                         </section>
                     </div>

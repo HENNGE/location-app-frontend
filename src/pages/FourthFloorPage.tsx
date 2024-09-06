@@ -12,9 +12,7 @@ import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import ErrorPage from './ErrorPage';
 
 const FourthFloorPage = (): JSX.Element => {
-    // user email if querying user, which times out
     const userEmail = useTemporaryState(useParams().id);
-
     const [open, setOpen] = useState('');
 
     const { data, isLoading, error } = useSWR(
