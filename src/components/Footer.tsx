@@ -9,8 +9,8 @@ const Footer = (): JSX.Element => {
                     the person's laptop.
                 </Text>
                 <Text c='dimmed' size='xs'>
-                    *Location refreshed every few minutes, which mean data can
-                    potentially be out of date.
+                    *Location is refreshed every few minutes, which means data
+                    can potentially be out of date.
                 </Text>
             </div>
         </AppShell.Footer>
