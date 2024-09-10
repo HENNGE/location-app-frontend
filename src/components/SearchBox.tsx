@@ -11,11 +11,11 @@ import {
     Text,
 } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
-import { IconSearch, IconUsersGroup, IconX } from '@tabler/icons-react';
+import { IconSearch, IconX } from '@tabler/icons-react';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
-import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
+import { KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
 import SearchModal from './SearchModal';
 
@@ -33,14 +33,14 @@ const SearchBox = () => {
         kasvotFetcher
     );
 
-    const { data: departments, isLoading: isLoadingDepartments } = useSWR<{
-        department: KasvotDepartment[];
-    }>(
-        debounced
-            ? `query{department(name: "${debounced.toLowerCase()}", active: "Y"){id name}}`
-            : '',
-        kasvotFetcher
-    );
+    // const { data: departments, isLoading: isLoadingDepartments } = useSWR<{
+    //     department: KasvotDepartment[];
+    // }>(
+    //     debounced
+    //         ? `query{department(name: "${debounced.toLowerCase()}", active: "Y"){id name}}`
+    //         : '',
+    //     kasvotFetcher
+    // );
 
     const { data: casvalLocation, isLoading: casvalLoading } = useSWR(
         queryMember ? ['/query-location', queryMember] : null,
@@ -49,8 +49,17 @@ const SearchBox = () => {
     );
 
     const optionsData = useMemo(() => {
-        if (members && departments) {
-            const combinedData = [...members.member, ...departments.department];
+        // if (members && departments) {
+        //     const combinedData = [...members.member, ...departments.department];
+
+        //     return [
+        //         ...new Set(
+        //             combinedData.map((queryData) => queryData.name || '')
+        //         ),
+        //     ];
+        // }
+        if (members) {
+            const combinedData = [...members.member];
 
             return [
                 ...new Set(
@@ -58,7 +67,7 @@ const SearchBox = () => {
                 ),
             ];
         }
-    }, [members, departments]);
+    }, [members]);
 
     const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
         option,
@@ -67,9 +76,9 @@ const SearchBox = () => {
             (member) => member.name === option.value
         );
 
-        const department = departments?.department.find(
-            (dept) => dept.name === option.value
-        );
+        // const department = departments?.department.find(
+        //     (dept) => dept.name === option.value
+        // );
 
         if (member) {
             return (
@@ -91,18 +100,19 @@ const SearchBox = () => {
                     </div>
                 </Group>
             );
-        } else if (department) {
-            return (
-                <Group gap='sm' className='flex flex-row'>
-                    <Avatar size={36} radius='xl'>
-                        <IconUsersGroup />
-                    </Avatar>
-                    <div className='flex max-w-64'>
-                        <Text size='sm'>{option.value}</Text>
-                    </div>
-                </Group>
-            );
         }
+        // else if (department) {
+        //     return (
+        //         <Group gap='sm' className='flex flex-row'>
+        //             <Avatar size={36} radius='xl'>
+        //                 <IconUsersGroup />
+        //             </Avatar>
+        //             <div className='flex max-w-64'>
+        //                 <Text size='sm'>{option.value}</Text>
+        //             </div>
+        //         </Group>
+        //     );
+        // }
     };
 
     const optionsFilter: OptionsFilter = useCallback(({ options, search }) => {
@@ -124,7 +134,7 @@ const SearchBox = () => {
                 value={value}
                 onChange={(value) => setValue(value)}
                 className='w-[22rem]'
-                placeholder='Search user or department ... '
+                placeholder='Search user ... '
                 leftSection={
                     <IconSearch
                         style={{ width: rem(16), height: rem(16) }}
@@ -132,9 +142,8 @@ const SearchBox = () => {
                     />
                 }
                 rightSection={
-                    isLoadingMembers ||
-                    casvalLoading ||
-                    isLoadingDepartments ? (
+                    isLoadingMembers || casvalLoading ? (
+                        // || isLoadingDepartments
                         <Loader size={18} />
                     ) : (
                         <ActionIcon
