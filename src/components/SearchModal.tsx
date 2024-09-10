@@ -48,26 +48,37 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
                         </Text>
                     </div>
 
-                    {casvalLocation.area_tags && (
-                        <Group>
-                            <Text size='sm'>
-                                {casvalLocation.area_tags[2].name}
-                            </Text>
-                            <ActionIcon
-                                aria-label='Go to user on map'
-                                variant='filled'
-                                size='md'
-                                color='#003366'
-                                onClick={() =>
-                                    window.location.replace(
-                                        `/level-${casvalLocation.area_tags[2].name[0]}/${member.email}`
-                                    )
-                                }
-                            >
-                                <IconDirectionSign />
-                            </ActionIcon>
-                        </Group>
-                    )}
+                    {casvalLocation.area_tags &&
+                        casvalLocation.last_seen &&
+                        timeDifference.minutes < 10 && (
+                            <Group>
+                                <Text size='sm'>
+                                    {casvalLocation.area_tags[2].name}
+                                </Text>
+                                <ActionIcon
+                                    aria-label='Go to user on map'
+                                    variant='filled'
+                                    size='md'
+                                    color='#003366'
+                                    onClick={() =>
+                                        window.location.replace(
+                                            `/level-${casvalLocation.area_tags[2].name[0]}/${member.email}`
+                                        )
+                                    }
+                                >
+                                    <IconDirectionSign />
+                                </ActionIcon>
+                            </Group>
+                        )}
+                    {casvalLocation.area_tags &&
+                        casvalLocation.last_seen &&
+                        timeDifference.minutes > 10 && (
+                            <Group>
+                                <Text size='sm' mb='xs' fw={500}>
+                                    User not found in the office
+                                </Text>
+                            </Group>
+                        )}
                 </Group>
             )}
             {(!casvalLocation.last_seen || timeDifference.hours > 1) &&
