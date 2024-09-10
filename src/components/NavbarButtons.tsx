@@ -2,8 +2,8 @@ import { UnstyledButton } from '@mantine/core';
 
 const NavbarButtons = (): JSX.Element => {
     const path = window.location.pathname;
-
-    console.log(123, path);
+    console.log(123);
+    console.log(456, path);
 
     return (
         <div className='flex flex-col space-y-1 sm:space-y-0 sm:space-x-1 sm:flex-row'>
