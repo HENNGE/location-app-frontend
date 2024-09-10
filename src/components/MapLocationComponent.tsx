@@ -70,7 +70,7 @@ const MapLocationComponent = ({
             return (
                 <>
                     {output.map((user) => (
-                        <Avatar src={user.imgUrl} />
+                        <Avatar src={user.imgUrl} key={user.id} />
                     ))}
                 </>
             );

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { preload, SWRConfig } from 'swr';
 import AuthWrapper from './components/AuthWrapper';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import LoadingComponent from './components/LoadingComponent';
 import NavbarButtons from './components/NavbarButtons';
@@ -114,6 +115,7 @@ const App = (): JSX.Element => {
                                 </BrowserRouter>
                             </Container>
                         </AppShell.Main>
+                        <Footer />
                     </AppShell>
                 )}
             </AuthWrapper>

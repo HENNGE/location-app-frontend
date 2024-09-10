@@ -131,7 +131,10 @@ const LocationDrawer = ({
                                         {user.positionDepartment?.map(
                                             (posDept) => {
                                                 return (
-                                                    <Text className='text-[0.6rem]'>{`${posDept.department?.name} - ${posDept.position?.name}`}</Text>
+                                                    <Text
+                                                        className='text-[0.6rem]'
+                                                        key={posDept.id}
+                                                    >{`${posDept.department?.name} - ${posDept.position?.name}`}</Text>
                                                 );
                                             }
                                         )}
