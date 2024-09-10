@@ -5,7 +5,7 @@ const NavbarButtons = (): JSX.Element => {
     return (
         <div className='flex flex-col space-y-1 sm:space-y-0 sm:space-x-1 sm:flex-row'>
             <UnstyledButton
-                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white ${
+                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
                     path === '/level-2' && 'bg-[#003366] text-white'
                 }`}
                 component='a'
@@ -16,7 +16,7 @@ const NavbarButtons = (): JSX.Element => {
                 2F
             </UnstyledButton>
             <UnstyledButton
-                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white ${
+                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
                     path === '/level-4' && 'bg-[#003366] text-white'
                 }`}
                 component='a'
@@ -28,7 +28,7 @@ const NavbarButtons = (): JSX.Element => {
             </UnstyledButton>
 
             <UnstyledButton
-                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white ${
+                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
                     path === '/level-5' && 'bg-[#003366] text-white'
                 }`}
                 component='a'
@@ -39,7 +39,7 @@ const NavbarButtons = (): JSX.Element => {
                 5F
             </UnstyledButton>
             <UnstyledButton
-                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white ${
+                className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
                     path === '/level-11' && 'bg-[#003366] text-white'
                 }`}
                 component='a'

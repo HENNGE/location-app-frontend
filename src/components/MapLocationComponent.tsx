@@ -96,6 +96,7 @@ const MapLocationComponent = ({
         >
             <div
                 onClick={() => handleClick(name)}
+                onKeyDown={(e) => e.key === 'Enter' && handleClick(name)}
                 data-note={name}
                 style={{
                     left: size.left,
