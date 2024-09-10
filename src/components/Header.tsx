@@ -1,8 +1,6 @@
-import { ActionIcon, AppShell, Burger, Group, Title } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
+import { AppShell, Burger, Group, Title } from '@mantine/core';
 import NavbarButtons from './NavbarButtons';
-import SearchModal from './SearchModal';
+import SearchBox from './SearchBox';
 
 interface Props {
     navbarOpen: boolean;
@@ -10,14 +8,13 @@ interface Props {
 }
 
 const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
-    const [opened, { open, close }] = useDisclosure(false);
     return (
         <AppShell.Header>
             <Group h='100%' px='md'>
                 <Burger
                     opened={navbarOpen}
                     onClick={navbarToggle}
-                    hiddenFrom='sm'
+                    hiddenFrom='md'
                     size='sm'
                 />
                 <Group
@@ -32,26 +29,19 @@ const Header = ({ navbarOpen, navbarToggle }: Props): JSX.Element => {
                         >
                             HENNGE Location
                         </Title>
-                        <ActionIcon
-                            variant='subtle'
-                            aria-label='Search'
-                            color='black'
-                            ml='md'
-                            onClick={open}
-                        >
-                            <IconSearch
-                                style={{ width: '100%', height: '100%' }}
-                                stroke={1.5}
-                            />
-                        </ActionIcon>
                     </div>
 
-                    <Group ml='xl' gap={0} visibleFrom='sm'>
+                    <Group
+                        ml='xl'
+                        gap={0}
+                        visibleFrom='md'
+                        className='sm:space-x-1 '
+                    >
                         <NavbarButtons />
+                        <SearchBox />
                     </Group>
                 </Group>
             </Group>
-            <SearchModal opened={opened} close={close} />
         </AppShell.Header>
     );
 };

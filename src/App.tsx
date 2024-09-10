@@ -1,21 +1,25 @@
-import { AppShell, Container, MantineProvider, Text } from '@mantine/core';
+import { AppShell, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { useDisclosure } from '@mantine/hooks';
 import { Cache } from 'aws-amplify/utils';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import useSWR, { SWRConfig } from 'swr';
+import { preload, SWRConfig } from 'swr';
 import AuthWrapper from './components/AuthWrapper';
 import Header from './components/Header';
 import LoadingComponent from './components/LoadingComponent';
 import NavbarButtons from './components/NavbarButtons';
 import EleventhFloorPage from './pages/EleventhFloorPage';
-import ErrorPage from './pages/ErrorPage';
 import FifthFloorPage from './pages/FifthFloorPage';
 import FourthFloorPage from './pages/FourthFloorPage';
+import NotFoundPage from './pages/NotFoundPage';
 import SecondFloorPage from './pages/SecondFloorPage';
-import { FetchedCasvalData } from './types/casval.types';
-import { fetcher } from './utilities/utilities';
+import { kasvotFetcher } from './utilities/utilities';
+
+preload(
+    `query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}`,
+    kasvotFetcher
+);
 
 const App = (): JSX.Element => {
     const [opened, { toggle }] = useDisclosure();
@@ -23,14 +27,9 @@ const App = (): JSX.Element => {
 
     useEffect(() => {
         Cache.getItem('signoutTimestamp').then((signoutTimestamp) =>
-            setSignoutTimestamp(signoutTimestamp)
+            setSignoutTimestamp(signoutTimestamp || '')
         );
     }, []);
-
-    const { data, isLoading, error } = useSWR<FetchedCasvalData>(
-        '/location-info',
-        fetcher
-    );
 
     return (
         <MantineProvider
@@ -69,27 +68,14 @@ const App = (): JSX.Element => {
                                     <SWRConfig
                                         value={{ provider: () => new Map() }}
                                     >
-                                        {error && <ErrorPage />}
-                                        {isLoading && (
-                                            <div className='w-full h-[50vh] flex justify-center items-center'>
-                                                <LoadingComponent message='Fetching map data ...' />
-                                            </div>
-                                        )}
-                                        {data && (
+                                        {signoutTimestamp && (
                                             <div className='flex flex-col justify-center items-center'>
-                                                {data && (
-                                                    <Text
-                                                        c='dimmed'
-                                                        size='md'
-                                                        className='mb-4'
-                                                    >
-                                                        {`2F: ${data.secondFloor.length} | 4F: ${data.fourthFloor.length} | 5F: ${data.fifthFloor.length} | 11F: ${data.eleventhFloor.length}`}
-                                                    </Text>
-                                                )}
                                                 <Routes>
                                                     <Route
                                                         path='*'
-                                                        element={<ErrorPage />}
+                                                        element={
+                                                            <NotFoundPage />
+                                                        }
                                                     />
                                                     <Route
                                                         path='/'
@@ -98,43 +84,27 @@ const App = (): JSX.Element => {
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-2'
+                                                        path='/level-2/:id?'
                                                         element={
-                                                            <SecondFloorPage
-                                                                data={
-                                                                    data.secondFloor
-                                                                }
-                                                            />
+                                                            <SecondFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-4'
+                                                        path='/level-4/:id?'
                                                         element={
-                                                            <FourthFloorPage
-                                                                data={
-                                                                    data.fourthFloor
-                                                                }
-                                                            />
+                                                            <FourthFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-5'
+                                                        path='/level-5/:id?'
                                                         element={
-                                                            <FifthFloorPage
-                                                                data={
-                                                                    data.fifthFloor
-                                                                }
-                                                            />
+                                                            <FifthFloorPage />
                                                         }
                                                     />
                                                     <Route
-                                                        path='/level-11'
+                                                        path='/level-11/:id?'
                                                         element={
-                                                            <EleventhFloorPage
-                                                                data={
-                                                                    data.eleventhFloor
-                                                                }
-                                                            />
+                                                            <EleventhFloorPage />
                                                         }
                                                     />
                                                 </Routes>

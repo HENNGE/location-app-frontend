@@ -53,7 +53,10 @@ const AuthWrapper = ({ children }: { children: ReactNode }) => {
                     });
                     Cache.setItem(
                         'signoutTimestamp',
-                        DateTime.now().toMillis()
+                        DateTime.now().toMillis(),
+                        {
+                            expires: loginExpiry.toMillis(),
+                        }
                     );
 
                     const beforeLoginUrl =
@@ -66,7 +69,6 @@ const AuthWrapper = ({ children }: { children: ReactNode }) => {
                 }
             }
         })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return <>{children}</>;

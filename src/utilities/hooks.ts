@@ -1,30 +1,20 @@
-import { useMemo } from 'react';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import { useEffect, useState } from 'react';
 
-const useFilteredData = (
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[]
-) => {
-    return useMemo(() => {
-        const output: {
-            [key: string]: {
-                user: CasvalUser;
-                userLocation: CasvalUserLocation;
-            }[];
-        } = {};
+export const useTimeoutState = (
+    initialValue: string | undefined,
+    duration: number = 8000
+): string | undefined => {
+    const [state, setState] = useState(initialValue);
 
-        data.forEach((user) => {
-            if (output[user.userLocation.name]) {
-                output[user.userLocation.name].push(user);
-            } else {
-                output[user.userLocation.name] = [user];
-            }
-        });
+    useEffect(() => {
+        if (initialValue && duration > 0) {
+            const timer = setTimeout(() => {
+                setState('');
+            }, duration);
 
-        return output;
-    }, [data]);
+            return () => clearTimeout(timer);
+        }
+    }, [initialValue, duration]);
+
+    return state;
 };
-
-export default useFilteredData;

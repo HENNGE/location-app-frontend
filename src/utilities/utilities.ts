@@ -3,18 +3,26 @@ import highCount from '../assets/hight-count.svg';
 import lowCount from '../assets/low-count.svg';
 import midCount from '../assets/mid-count.svg';
 
-export const fetcher = async (endpoint: string) => {
+export const fetcher = async <T>(
+    endpoint: string,
+    body?: { email: string }
+) => {
     const url = `${import.meta.env.VITE_CASVAL_URL}${endpoint}`;
 
     const response = await axios.post(url, {
         client_id: import.meta.env.VITE_TENANT_ID,
         client_secret: import.meta.env.VITE_SECRET,
+        ...(body && { email: body.email }),
     });
 
-    return response.data;
+    return response.data as T;
 };
 
-export const kasvotFetcher = async (query: string) => {
+export const kasvotFetcher = async <T>(query: string): Promise<T> => {
+    if (!query) {
+        throw new Error('No query');
+    }
+
     const url = `${import.meta.env.VITE_KASVOT_URL}`;
 
     const response = await axios.post(
@@ -30,7 +38,7 @@ export const kasvotFetcher = async (query: string) => {
         }
     );
 
-    return response.data;
+    return response.data.data as T;
 };
 
 export const getCountIcon = (count: number) => {

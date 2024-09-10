@@ -1,22 +1,27 @@
-import { Autocomplete, Drawer, DrawerRootProps, Text } from '@mantine/core';
-import { DateTime } from 'luxon';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import useSWR from 'swr';
-import { CasvalUser, CasvalUserLocation } from '../types/casval.types';
+import {
+    Autocomplete,
+    Drawer,
+    DrawerRootProps,
+    FocusTrap,
+    Text,
+} from '@mantine/core';
+import { useEffect, useMemo, useState } from 'react';
+import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
-import { kasvotFetcher } from '../utilities/utilities';
-import LoadingComponent from './LoadingComponent';
 
 interface Props {
     open: string;
     handleOpen: (value: string) => void;
-    data: {
-        user: CasvalUser;
-        userLocation: CasvalUserLocation;
-    }[];
+    data: FetchedCasvalData[];
+    members: KasvotMember[] | undefined;
 }
 
-const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
+const LocationDrawer = ({
+    data,
+    open,
+    handleOpen,
+    members,
+}: Props): JSX.Element => {
     const [searchQuery, setSearchQuery] = useState('');
     const [drawerPosition, setDrawerPosition] =
         useState<DrawerRootProps['position']>('left');
@@ -27,12 +32,11 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         if (open) {
             setIsClosing(false);
             if (
-                open.includes('Wide-Deck') ||
-                open.includes('Team-Lounge') ||
-                open.includes('Forest') ||
-                open.includes('South') ||
-                open.includes('Meeting Rooms') ||
-                open.includes('2F-Team-Lounge')
+                open.includes('11F Guest Meeting Rooms') ||
+                open.includes('5F Meeting Rooms') ||
+                open.includes('5F Web Meeting') ||
+                open.includes('2F Wide Deck') ||
+                open.includes('2F Team Lounge')
             ) {
                 setDrawerPosition('right');
             } else {
@@ -41,57 +45,50 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
         }
     }, [open]);
 
-    const { data: members, isLoading } = useSWR<{
-        data: { member: KasvotMember[] };
-    }>(
-        'query{member{id name email imgUrl positionDepartment{id primary department{id name} position{id name priority}}}}',
-        kasvotFetcher
-    );
+    const filteredData = useMemo(() => {
+        const [output] = data.filter((data) => data.areaTag.name === open);
+        if (output) {
+            return output.users;
+        }
+        return [];
+    }, [data, open]);
 
-    const filteredMembers = useCallback(() => {
-        return data.map((casvalUser) => {
-            if (members) {
-                const matchingUser = members.data.member.find(
-                    (kasvotMember) => {
-                        if (kasvotMember.email === casvalUser.user.email) {
-                            kasvotMember.positionDepartment?.sort(
-                                (a, b) =>
-                                    (a.position?.priority || 0) -
-                                    (b.position?.priority || 0)
-                            );
-                            return kasvotMember;
-                        }
-                    }
-                );
-                if (matchingUser) {
-                    return { ...casvalUser, kasvotData: matchingUser };
-                } else {
-                    return { ...casvalUser, kasvotData: {} };
-                }
-            } else {
-                return { ...casvalUser, kasvotData: {} };
-            }
-        });
-    }, [data, members]);
+    const filteredMembers = useMemo(() => {
+        if (!members || !Array.isArray(members)) {
+            return [];
+        }
 
-    const filteredSearch = useMemo(() => {
-        const output: {
-            user: CasvalUser;
-            userLocation: CasvalUserLocation;
-            kasvotData: KasvotMember;
-        }[] = [];
+        const output: KasvotMember[] = [];
 
-        filteredMembers().forEach((member) => {
-            if (
-                member.kasvotData.name &&
-                member.kasvotData.name
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase())
-            ) {
+        members.forEach((member) => {
+            const user = filteredData.find(
+                (user) => user.email === member.email
+            );
+            if (user) {
                 output.push(member);
             }
         });
 
+        return output.sort((a, b) =>
+            (a.name || '').localeCompare(b.name || '')
+        );
+    }, [members, filteredData]);
+
+    const filteredSearch = useMemo(() => {
+        const output: KasvotMember[] = [];
+
+        if (filteredMembers) {
+            filteredMembers.forEach((member) => {
+                if (
+                    member.name &&
+                    member.name
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                ) {
+                    output.push(member);
+                }
+            });
+        }
         return output;
     }, [filteredMembers, searchQuery]);
 
@@ -104,11 +101,12 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
             radius='md'
             size='xs'
             title={open}
+            closeButtonProps={{ 'aria-label': 'Close drawer' }}
             overlayProps={{ backgroundOpacity: 0.25, blur: 0 }}
         >
+            <FocusTrap.InitialFocus />
             <div className='h-full w-[17rem]'>
-                {isLoading && <LoadingComponent message='Fetching users ...' />}
-                {!isLoading && (
+                {filteredSearch && (
                     <>
                         <Autocomplete
                             className='w-[17rem]'
@@ -118,19 +116,19 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                         {filteredSearch.map((user) => (
                             <div
                                 className='w-full flex justify-start items-center my-2 p-1 hover:bg-slate-100 hover:rounded-lg space-x-4'
-                                key={user.user.id}
+                                key={user.id}
                             >
                                 <img
                                     loading='lazy'
-                                    src={user.kasvotData.imgUrl}
-                                    alt={`${user.kasvotData.name}'s picture`}
+                                    src={user.imgUrl}
+                                    alt={`${user.name}'s picture`}
                                     className='h-[4rem] w-[3rem] object-cover rounded-full'
                                     title='profile image'
                                 />
                                 <div>
-                                    <Text>{user.kasvotData.name}</Text>
+                                    <Text>{user.name}</Text>
                                     <div className='flex flex-col'>
-                                        {user.kasvotData.positionDepartment?.map(
+                                        {user.positionDepartment?.map(
                                             (posDept) => {
                                                 return (
                                                     <Text className='text-[0.6rem]'>{`${posDept.department?.name} - ${posDept.position?.name}`}</Text>
@@ -138,14 +136,6 @@ const LocationDrawer = ({ data, open, handleOpen }: Props): JSX.Element => {
                                             }
                                         )}
                                     </div>
-
-                                    <Text c='dimmed' className='text-[0.6rem]'>
-                                        {`Last Seen: ${DateTime.fromISO(
-                                            user.userLocation.last_seen
-                                        ).toRelative({
-                                            unit: ['hours', 'minutes'],
-                                        })}`}
-                                    </Text>
                                 </div>
                             </div>
                         ))}
