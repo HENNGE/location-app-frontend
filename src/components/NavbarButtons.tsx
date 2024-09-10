@@ -9,7 +9,7 @@ const NavbarButtons = (): JSX.Element => {
         <div className='flex flex-col space-y-1 sm:space-y-0 sm:space-x-1 sm:flex-row'>
             <UnstyledButton
                 className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
-                    path === '/' || path === '/level-2'
+                    path === '/' || path === '/level-2/'
                         ? 'bg-[#003366] text-white'
                         : ''
                 }`}
@@ -22,7 +22,7 @@ const NavbarButtons = (): JSX.Element => {
             </UnstyledButton>
             <UnstyledButton
                 className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
-                    path === '/level-4' ? 'bg-[#003366] text-white' : ''
+                    path === '/level-4/' ? 'bg-[#003366] text-white' : ''
                 }`}
                 component='a'
                 role='button'
@@ -34,7 +34,7 @@ const NavbarButtons = (): JSX.Element => {
 
             <UnstyledButton
                 className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
-                    path === '/level-5' ? 'bg-[#003366] text-white' : ''
+                    path === '/level-5/' ? 'bg-[#003366] text-white' : ''
                 }`}
                 component='a'
                 role='button'
@@ -45,7 +45,7 @@ const NavbarButtons = (): JSX.Element => {
             </UnstyledButton>
             <UnstyledButton
                 className={`block px-4 py-1 rounded-md font-medium transition-colors duration-200 hover:bg-[#003366] hover:text-white focus:bg-[#003366] focus:text-white ${
-                    path === '/level-11' ? 'bg-[#003366] text-white' : ''
+                    path === '/level-11/' ? 'bg-[#003366] text-white' : ''
                 }`}
                 component='a'
                 role='button'
