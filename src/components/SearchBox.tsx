@@ -85,6 +85,7 @@ const SearchBox = () => {
                 <Group
                     gap='sm'
                     onClick={() => setQueryMember(member.email || '')}
+                    className='w-full h-full'
                 >
                     <Avatar
                         src={member.imgUrl}
