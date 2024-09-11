@@ -1,4 +1,12 @@
-import { Autocomplete, FocusTrap, Modal, Text, Title } from '@mantine/core';
+import {
+    Autocomplete,
+    FocusTrap,
+    Modal,
+    rem,
+    Text,
+    Title,
+} from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
@@ -150,6 +158,12 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                         className='w-[21rem] ml-4'
                         placeholder='Search for a user ...'
                         onChange={setSearchQuery}
+                        leftSection={
+                            <IconSearch
+                                style={{ width: rem(16), height: rem(16) }}
+                                stroke={1.5}
+                            />
+                        }
                     />
                 </div>
             }

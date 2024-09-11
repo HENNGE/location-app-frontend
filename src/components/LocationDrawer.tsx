@@ -3,8 +3,10 @@ import {
     Drawer,
     DrawerRootProps,
     FocusTrap,
+    rem,
     Text,
 } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { useEffect, useMemo, useState } from 'react';
 import { FetchedCasvalData } from '../types/casval.types';
 import { KasvotMember } from '../types/kasvot.types';
@@ -113,6 +115,12 @@ const LocationDrawer = ({
                             className='w-[17rem]'
                             placeholder='Search for a user ...'
                             onChange={setSearchQuery}
+                            leftSection={
+                                <IconSearch
+                                    style={{ width: rem(16), height: rem(16) }}
+                                    stroke={1.5}
+                                />
+                            }
                         />
                         {filteredSearch.map((user) => (
                             <div

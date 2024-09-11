@@ -131,7 +131,7 @@ const SearchBox = () => {
                 value={value}
                 onChange={(value) => setValue(value)}
                 className='w-[22rem]'
-                placeholder='Search user ... '
+                placeholder='Search user or department ... '
                 leftSection={
                     <IconSearch
                         style={{ width: rem(16), height: rem(16) }}
