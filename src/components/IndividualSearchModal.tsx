@@ -12,7 +12,12 @@ interface Props {
     casvalLocation: CasvalUserLocation;
 }
 
-const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
+const IndividualSearchModal = ({
+    member,
+    open,
+    handleClose,
+    casvalLocation,
+}: Props) => {
     const timeDifference: Duration<true> = useMemo(() => {
         const parsedDate = DateTime.fromISO(casvalLocation.last_seen || '');
 
@@ -108,4 +113,4 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
     );
 };
 
-export default SearchModal;
+export default IndividualSearchModal;
