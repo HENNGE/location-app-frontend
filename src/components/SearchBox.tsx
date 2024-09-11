@@ -134,7 +134,7 @@ const SearchBox = () => {
                 value={value}
                 onChange={(value) => setValue(value)}
                 className='w-[22rem]'
-                placeholder='Search user or department ... '
+                placeholder='Search user ... '
                 leftSection={
                     <IconSearch
                         style={{ width: rem(16), height: rem(16) }}
@@ -143,7 +143,7 @@ const SearchBox = () => {
                 }
                 rightSection={
                     isLoadingMembers || casvalLoading ? (
-                        // ||isLoadingDepartments
+                        // || isLoadingDepartments
                         <Loader size={18} />
                     ) : (
                         <ActionIcon

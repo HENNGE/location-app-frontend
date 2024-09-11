@@ -32,11 +32,12 @@ const LocationDrawer = ({
         if (open) {
             setIsClosing(false);
             if (
-                open.includes('11F Guest Meeting Rooms') ||
+                open.includes('11F Open') ||
                 open.includes('5F Meeting Rooms') ||
                 open.includes('5F Web Meeting') ||
                 open.includes('2F Wide Deck') ||
-                open.includes('2F Team Lounge')
+                open.includes('2F Team Lounge') ||
+                open.includes('4F Forest')
             ) {
                 setDrawerPosition('right');
             } else {

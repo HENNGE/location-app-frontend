@@ -71,7 +71,7 @@ const SecondFloorPage = (): JSX.Element => {
                         </section>
                         <section id='team-lounge'>
                             <MapLocationComponent
-                                name='2F Team Lounge West'
+                                name='2F Team Lounge East'
                                 size={{
                                     left: '1%',
                                     top: '28%',
@@ -85,7 +85,7 @@ const SecondFloorPage = (): JSX.Element => {
                                 members={kasvotMembers.member}
                             />
                             <MapLocationComponent
-                                name='2F Team Lounge East'
+                                name='2F Team Lounge West'
                                 size={{
                                     left: '28.5%',
                                     top: '28%',
