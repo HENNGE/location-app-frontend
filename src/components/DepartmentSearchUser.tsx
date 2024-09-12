@@ -28,7 +28,9 @@ const DepartmentSearchUser = ({ email, lastSeenMinutes, areaName }: Props) => {
                     color='#003366'
                     onClick={() =>
                         window.location.replace(
-                            `/level-${areaName[0]}/${email}`
+                            `/level-${
+                                areaName[0] === '1' ? `11` : areaName[0]
+                            }/${email}`
                         )
                     }
                 >

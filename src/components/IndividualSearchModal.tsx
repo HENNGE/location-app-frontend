@@ -67,7 +67,13 @@ const IndividualSearchModal = ({
                                     color='#003366'
                                     onClick={() =>
                                         window.location.replace(
-                                            `/level-${casvalLocation.area_tags[2].name[0]}/${member.email}`
+                                            `/level-${
+                                                casvalLocation.area_tags[2]
+                                                    .name[0] === '1'
+                                                    ? '11'
+                                                    : casvalLocation
+                                                          .area_tags[2].name[0]
+                                            }/${member.email}`
                                         )
                                     }
                                 >
