@@ -79,34 +79,35 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
 
         casvalLocation.forEach((location) => {
             const locationName = location.location.name;
+            const lastSeenMinutes = timeDifference(
+                location.location.last_seen
+            ).minutes;
+
             if (locationName) {
+                if (lastSeenMinutes >= 5) {
+                    // seems that anyone over 5 minutes does not show in the office
+                    return;
+                }
+
                 if (locationName.includes('2F')) {
                     output['2F'].push({
                         ...location,
-                        lastSeenMinutes: timeDifference(
-                            location.location.last_seen
-                        ).minutes,
+                        lastSeenMinutes,
                     });
                 } else if (locationName.includes('4F')) {
                     output['4F'].push({
                         ...location,
-                        lastSeenMinutes: timeDifference(
-                            location.location.last_seen
-                        ).minutes,
+                        lastSeenMinutes,
                     });
                 } else if (locationName.includes('5F')) {
                     output['5F'].push({
                         ...location,
-                        lastSeenMinutes: timeDifference(
-                            location.location.last_seen
-                        ).minutes,
+                        lastSeenMinutes,
                     });
                 } else if (locationName.includes('11F')) {
                     output['11F'].push({
                         ...location,
-                        lastSeenMinutes: timeDifference(
-                            location.location.last_seen
-                        ).minutes,
+                        lastSeenMinutes,
                     });
                 }
             } else {
@@ -154,17 +155,19 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
             title={
                 <div className='flex flex-row justify-between items-center'>
                     <Title order={4}>{department.name}</Title>
-                    <Autocomplete
-                        className='w-[21rem] ml-4'
-                        placeholder='Search for a user ...'
-                        onChange={setSearchQuery}
-                        leftSection={
-                            <IconSearch
-                                style={{ width: rem(16), height: rem(16) }}
-                                stroke={1.5}
-                            />
-                        }
-                    />
+                    {filteredData && !casvalLoading && (
+                        <Autocomplete
+                            className='w-[21rem] ml-4'
+                            placeholder='Search for a user ...'
+                            onChange={setSearchQuery}
+                            leftSection={
+                                <IconSearch
+                                    style={{ width: rem(16), height: rem(16) }}
+                                    stroke={1.5}
+                                />
+                            }
+                        />
+                    )}
                 </div>
             }
             overlayProps={{
