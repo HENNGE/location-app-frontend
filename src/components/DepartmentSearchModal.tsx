@@ -3,6 +3,7 @@ import {
     FocusTrap,
     Modal,
     rem,
+    Skeleton,
     Text,
     Title,
 } from '@mantine/core';
@@ -14,7 +15,6 @@ import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment } from '../types/kasvot.types';
 import { fetcher } from '../utilities/utilities';
 import DepartmentSearchUser from './DepartmentSearchUser';
-import LoadingComponent from './LoadingComponent';
 
 interface CasvalDisplay {
     location: CasvalUserLocation;
@@ -84,8 +84,7 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
             ).minutes;
 
             if (locationName) {
-                if (lastSeenMinutes >= 5) {
-                    // seems that anyone over 5 minutes does not show in the office
+                if (lastSeenMinutes >= 15) {
                     return;
                 }
 
@@ -177,12 +176,12 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
             withCloseButton={false}
         >
             <FocusTrap.InitialFocus />
-            {casvalLoading && (
+            {/* {casvalLoading && (
                 <div className='w-full h-[50vh] flex justify-center items-center'>
                     <LoadingComponent message='Fetching map data ...' />
                 </div>
-            )}
-            {filteredData && !casvalLoading && (
+            )} */}
+            {/* {filteredData && !casvalLoading && (
                 <div className='flex flex-col sm:flex-row sm:space-x-6'>
                     <div className='flex flex-col justify-start items-center w-[15rem]'>
                         <Title>2F</Title>
@@ -237,7 +236,95 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                         ))}
                     </div>
                 </div>
-            )}
+            )} */}
+
+            <div className='flex flex-col sm:flex-row sm:space-x-6'>
+                <div className='flex flex-col justify-start items-center w-[15rem]'>
+                    <Title>2F</Title>
+                    {casvalLoading && (
+                        <>
+                            <Skeleton height={8} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                        </>
+                    )}
+                    {filteredData &&
+                        filteredData['2F'].map((location) => (
+                            <DepartmentSearchUser
+                                key={location.email}
+                                email={location.email}
+                                lastSeenMinutes={Math.floor(
+                                    location.lastSeenMinutes
+                                )}
+                                areaName={location.location.area_tags[2].name}
+                            />
+                        ))}
+                </div>
+                <div className='flex flex-col justify-start items-center w-[15rem]'>
+                    <Title>4F</Title>
+                    {casvalLoading && (
+                        <>
+                            <Skeleton height={8} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                        </>
+                    )}
+                    {filteredData &&
+                        filteredData['4F'].map((location) => (
+                            <DepartmentSearchUser
+                                key={location.email}
+                                email={location.email}
+                                lastSeenMinutes={Math.floor(
+                                    location.lastSeenMinutes
+                                )}
+                                areaName={location.location.area_tags[2].name}
+                            />
+                        ))}
+                </div>
+                <div className='flex flex-col justify-start items-center w-[15rem]'>
+                    <Title>5F</Title>
+                    {casvalLoading && (
+                        <>
+                            <Skeleton height={8} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                        </>
+                    )}
+                    {filteredData &&
+                        filteredData['5F'].map((location) => (
+                            <DepartmentSearchUser
+                                key={location.email}
+                                email={location.email}
+                                lastSeenMinutes={Math.floor(
+                                    location.lastSeenMinutes
+                                )}
+                                areaName={location.location.area_tags[2].name}
+                            />
+                        ))}
+                </div>
+                <div className='flex flex-col justify-start items-center w-[15rem]'>
+                    <Title>11F</Title>
+                    {casvalLoading && (
+                        <>
+                            <Skeleton height={8} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                            <Skeleton height={8} mt={6} radius='xl' />
+                        </>
+                    )}
+                    {filteredData &&
+                        filteredData['11F'].map((location) => (
+                            <DepartmentSearchUser
+                                key={location.email}
+                                email={location.email}
+                                lastSeenMinutes={Math.floor(
+                                    location.lastSeenMinutes
+                                )}
+                                areaName={location.location.area_tags[2].name}
+                            />
+                        ))}
+                </div>
+            </div>
+
             {filteredData &&
                 filteredData['2F'].length === 0 &&
                 filteredData['4F'].length === 0 &&
