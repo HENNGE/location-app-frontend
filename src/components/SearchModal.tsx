@@ -50,7 +50,7 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
 
                     {casvalLocation.area_tags &&
                         casvalLocation.last_seen &&
-                        timeDifference.minutes < 10 && (
+                        timeDifference.minutes <= 15 && (
                             <Group>
                                 <Text size='sm'>
                                     {casvalLocation.area_tags[2].name}
@@ -72,7 +72,7 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
                         )}
                     {casvalLocation.area_tags &&
                         casvalLocation.last_seen &&
-                        timeDifference.minutes > 10 && (
+                        timeDifference.minutes > 15 && (
                             <Group>
                                 <Text size='sm' mb='xs' fw={500}>
                                     User not found in the office
