@@ -3,7 +3,6 @@ import {
     FocusTrap,
     Modal,
     rem,
-    Skeleton,
     Text,
     Title,
 } from '@mantine/core';
@@ -15,6 +14,7 @@ import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment } from '../types/kasvot.types';
 import { fetcher } from '../utilities/utilities';
 import DepartmentSearchUser from './DepartmentSearchUser';
+import { DepartmentSearchSkeleton } from './SkeletonLoading';
 
 interface CasvalDisplay {
     location: CasvalUserLocation;
@@ -243,9 +243,11 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                     <Title>2F</Title>
                     {casvalLoading && (
                         <>
-                            <Skeleton height={8} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
                         </>
                     )}
                     {filteredData &&
@@ -264,9 +266,9 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                     <Title>4F</Title>
                     {casvalLoading && (
                         <>
-                            <Skeleton height={8} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
                         </>
                     )}
                     {filteredData &&
@@ -285,9 +287,9 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                     <Title>5F</Title>
                     {casvalLoading && (
                         <>
-                            <Skeleton height={8} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
                         </>
                     )}
                     {filteredData &&
@@ -306,9 +308,8 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                     <Title>11F</Title>
                     {casvalLoading && (
                         <>
-                            <Skeleton height={8} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
-                            <Skeleton height={8} mt={6} radius='xl' />
+                            <DepartmentSearchSkeleton />
+                            <DepartmentSearchSkeleton />
                         </>
                     )}
                     {filteredData &&
