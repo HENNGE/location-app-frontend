@@ -177,7 +177,7 @@ const SearchBox = () => {
                     casvalLocation={casvalLocation}
                 />
             )}
-            {queryDepartment && departments?.department && (
+            {queryDepartment && (
                 <DepartmentSearchmodal
                     open={!!queryDepartment}
                     handleClose={() => {
@@ -185,9 +185,11 @@ const SearchBox = () => {
                         setValue('');
                     }}
                     department={
-                        departments.department.filter(
-                            (dept) => dept.id === queryDepartment
-                        )[0]
+                        (departments &&
+                            departments.department.filter(
+                                (dept) => dept.id === queryDepartment
+                            )[0]) ||
+                        {}
                     }
                 />
             )}
