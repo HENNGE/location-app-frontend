@@ -1,10 +1,16 @@
 import react from '@vitejs/plugin-react';
 import autoprefixer from 'autoprefixer';
 import tailwind from 'tailwindcss';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    test: {
+        coverage: {
+            provider: 'istanbul',
+        },
+        watch: true,
+    },
     plugins: [react()],
     css: {
         postcss: {
