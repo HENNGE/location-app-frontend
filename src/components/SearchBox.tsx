@@ -61,7 +61,6 @@ const SearchBox = () => {
             ];
         }
     }, [members, departments]);
-
     const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
         option,
     }) => {
@@ -76,6 +75,7 @@ const SearchBox = () => {
         if (member) {
             return (
                 <Group
+                    role='option'
                     gap='sm'
                     onClick={() => setQueryMember(member.email || '')}
                     className='w-full h-full'
@@ -97,6 +97,7 @@ const SearchBox = () => {
         } else if (department) {
             return (
                 <Group
+                    role='option'
                     gap='sm'
                     className='flex flex-row w-full h-full'
                     onClick={() => setQueryDepartment(department.id || '')}
@@ -145,6 +146,8 @@ const SearchBox = () => {
                         <Loader size={18} />
                     ) : (
                         <ActionIcon
+                            name='Clear search'
+                            aria-label='Clear search'
                             onClick={() => {
                                 setValue('');
                                 setQueryMember('');

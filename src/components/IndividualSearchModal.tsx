@@ -36,6 +36,7 @@ const IndividualSearchModal = ({
             overlayProps={{
                 backgroundOpacity: 0.5,
                 blur: 5,
+                'aria-label': 'modal-backdrop',
             }}
             withCloseButton={false}
         >

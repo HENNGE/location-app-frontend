@@ -172,6 +172,7 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
             overlayProps={{
                 backgroundOpacity: 0.5,
                 blur: 5,
+                'aria-label': 'modal-backdrop',
             }}
             withCloseButton={false}
         >
