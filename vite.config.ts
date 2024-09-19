@@ -10,6 +10,9 @@ export default defineConfig({
             provider: 'istanbul',
         },
         watch: true,
+        globals: true,
+        setupFiles: './test/setup.ts',
+        environment: 'happy-dom',
     },
     plugins: [react()],
     css: {
