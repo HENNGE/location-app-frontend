@@ -57,7 +57,7 @@ const LocationDrawer = ({
     }, [data, open]);
 
     const filteredMembers = useMemo(() => {
-        if (!members || !Array.isArray(members)) {
+        if (!members || !Array.isArray(members) || members.length < 1) {
             return [];
         }
 
@@ -121,6 +121,7 @@ const LocationDrawer = ({
                                     stroke={1.5}
                                 />
                             }
+                            aria-label='User-search-box'
                         />
                         {filteredSearch.map((user) => (
                             <div

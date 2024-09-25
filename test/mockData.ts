@@ -1,4 +1,8 @@
-import { CasvalUserLocation } from '../src/types/casval.types';
+import {
+    AreaTag,
+    CasvalUser,
+    CasvalUserLocation,
+} from '../src/types/casval.types';
 import { KasvotDepartment, KasvotMember } from '../src/types/kasvot.types';
 
 export const mockMembers: KasvotMember[] = [
@@ -161,3 +165,24 @@ export const mockCasvalUserLocation: CasvalUserLocation = {
     device_name: 'iPhone 12',
     device_is_primary: true,
 };
+
+export const mockAreaTag: AreaTag = {
+    id: '123',
+    name: 'Shibuya',
+    access_points: [
+        { id: '456', name: 'access-point-1', mac_address: 'mac address' },
+    ],
+};
+
+export const mockAreaTagTwo: AreaTag = {
+    id: '456',
+    name: '4F Forest',
+    access_points: [
+        { id: '123', name: 'access-point-2', mac_address: 'mac address 1' },
+    ],
+};
+
+export const mockCasvalUsers: CasvalUser[] = [
+    { id: mockMembers[0].id as string, email: mockMembers[0].email as string },
+    { id: mockMembers[1].id as string, email: mockMembers[1].email as string },
+];
