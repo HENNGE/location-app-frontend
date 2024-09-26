@@ -17,7 +17,7 @@ import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
-import DepartmentSearchmodal from './DepartmentSearchModal';
+import DepartmentSearchModal from './DepartmentSearchModal';
 import IndividualSearchModal from './IndividualSearchModal';
 
 const SearchBox = () => {
@@ -181,7 +181,7 @@ const SearchBox = () => {
                 />
             )}
             {queryDepartment && (
-                <DepartmentSearchmodal
+                <DepartmentSearchModal
                     open={!!queryDepartment}
                     handleClose={() => {
                         setQueryDepartment('');

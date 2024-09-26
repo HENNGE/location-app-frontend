@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import {
     AreaTag,
     CasvalUser,
@@ -9,7 +10,7 @@ export const mockMembers: KasvotMember[] = [
     {
         id: 'member-1',
         name: 'Member Name 1',
-        email: 'member1@example.com',
+        email: 'member.one@example.com',
         imgUrl: 'https://example.com/img/member1.jpg',
         positionDepartment: [
             {
@@ -30,7 +31,7 @@ export const mockMembers: KasvotMember[] = [
     {
         id: 'member-2',
         name: 'Member Name 2',
-        email: 'member2@example.com',
+        email: 'member.two@example.com',
         imgUrl: 'https://example.com/img/member2.jpg',
         positionDepartment: [
             {
@@ -51,7 +52,7 @@ export const mockMembers: KasvotMember[] = [
     {
         id: 'member-3',
         name: 'Member Name 3',
-        email: 'member3@example.com',
+        email: 'member.three@example.com',
         imgUrl: 'https://example.com/img/member3.jpg',
         positionDepartment: [
             {
@@ -151,6 +152,24 @@ export const mockDepartments: KasvotDepartment[] = [
     },
 ];
 
+export const mockDepartmentsTwo: KasvotDepartment[] = [
+    {
+        id: 'test-department',
+        name: 'Test Department',
+        currentMembersAndChildrenEmails: ['member.test@example.com'],
+    },
+    {
+        id: 'test-department 2',
+        name: 'Test Department 2',
+        currentMembersAndChildrenEmails: [
+            'member.test2@example.com',
+            'member.test3@example.com',
+            'member.test4@example.com',
+            'member.test5@example.com',
+        ],
+    },
+];
+
 export const mockCasvalUserLocation: CasvalUserLocation = {
     id: '12345',
     name: 'Member Name 1',
@@ -159,12 +178,85 @@ export const mockCasvalUserLocation: CasvalUserLocation = {
         { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
         { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
     ],
-    last_seen: '2024-09-19T14:30:00Z',
+    last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
     recent: true,
     device_id: 'device123',
     device_name: 'iPhone 12',
     device_is_primary: true,
 };
+
+export const mockCasvalUserLocationTwo: CasvalUserLocation[] = [
+    {
+        id: '12345',
+        name: '2F',
+        area_tags: [
+            { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
+            { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
+            { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        ],
+        last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
+        recent: true,
+        device_id: 'device123',
+        device_name: 'iPhone 12',
+        device_is_primary: true,
+    },
+    {
+        id: '678',
+        name: '4F',
+        area_tags: [
+            { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
+            { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
+            { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        ],
+        last_seen: DateTime.now().minus({ minutes: 50 }).toUTC().toISO(),
+        recent: true,
+        device_id: '1',
+        device_name: 'iPhone 1',
+        device_is_primary: true,
+    },
+    {
+        id: '6asd12378',
+        name: '4F',
+        area_tags: [
+            { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
+            { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
+            { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        ],
+        last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
+        recent: true,
+        device_id: '1',
+        device_name: 'iPhone 1',
+        device_is_primary: true,
+    },
+    {
+        id: '6754a358',
+        name: '5F',
+        area_tags: [
+            { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
+            { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
+            { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        ],
+        last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
+        recent: true,
+        device_id: '1',
+        device_name: 'iPhone 1',
+        device_is_primary: true,
+    },
+    {
+        id: '1231231',
+        name: '11F',
+        area_tags: [
+            { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
+            { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
+            { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        ],
+        last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
+        recent: true,
+        device_id: '1',
+        device_name: 'iPhone 1',
+        device_is_primary: true,
+    },
+];
 
 export const mockAreaTag: AreaTag = {
     id: '123',

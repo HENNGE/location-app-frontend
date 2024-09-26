@@ -12,7 +12,7 @@ import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
 import { KasvotDepartment } from '../types/kasvot.types';
-import { fetcher } from '../utilities/utilities';
+import { fetcher, parseEmail } from '../utilities/utilities';
 import DepartmentSearchUser from './DepartmentSearchUser';
 import { DepartmentSearchSkeleton } from './SkeletonLoading';
 
@@ -28,7 +28,7 @@ interface Props {
     department: KasvotDepartment;
 }
 
-const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
+const DepartmentSearchModal = ({ open, handleClose, department }: Props) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const { data: casvalLocation, isLoading: casvalLoading } = useSWR(
@@ -109,13 +109,6 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                         lastSeenMinutes,
                     });
                 }
-            } else {
-                output.absent.push({
-                    ...location,
-                    lastSeenMinutes: timeDifference(
-                        location.location.last_seen || ''
-                    ).minutes,
-                });
             }
         });
 
@@ -131,8 +124,10 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
 
         const filterByQuery = (items: CasvalDisplay[]) => {
             return items.filter((item) => {
-                const emailMatches = item.email.toLowerCase().includes(query);
-                return emailMatches;
+                const name = parseEmail(item.email).toLowerCase();
+                const match = name.includes(query);
+
+                return match;
             });
         };
 
@@ -158,6 +153,7 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
                         <Autocomplete
                             className='w-[21rem] ml-4'
                             placeholder='Search for a user ...'
+                            aria-label='user search box'
                             onChange={setSearchQuery}
                             leftSection={
                                 <IconSearch
@@ -274,4 +270,4 @@ const DepartmentSearchmodal = ({ open, handleClose, department }: Props) => {
     );
 };
 
-export default DepartmentSearchmodal;
+export default DepartmentSearchModal;
