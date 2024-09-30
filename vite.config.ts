@@ -8,7 +8,15 @@ export default defineConfig({
     test: {
         coverage: {
             provider: 'istanbul',
+            exclude: [
+                'e2e/**',
+                'test/**',
+                '**/*.config.{js,ts}',
+                '**/*.eslintrc.cjs',
+            ],
         },
+        exclude: ['e2e/**'],
+        include: ['src/**/*.test.{ts,tsx}'],
         watch: true,
         globals: true,
         setupFiles: './test/setup.ts',
