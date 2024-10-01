@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
-    "test:e2e": "pnpm exec playwright test"
+    "test:e2e": "VITE_PLAYWRIGHT_TEST=true pnpm exec playwright test"
   },
   "dependencies": {
     "@mantine/core": "^7.11.2",

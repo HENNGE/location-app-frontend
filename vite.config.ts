@@ -13,6 +13,7 @@ export default defineConfig({
                 'test/**',
                 '**/*.config.{js,ts}',
                 '**/*.eslintrc.cjs',
+                '**/main.tsx',
             ],
         },
         exclude: ['e2e/**'],

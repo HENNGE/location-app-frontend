@@ -13,6 +13,10 @@ const AuthWrapper = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         (async () => {
+            if (import.meta.env.VITE_PLAYWRIGHT_TEST) {
+                return;
+            }
+
             const token = await Cache.getItem('jwtToken');
             const timestamp = await Cache.getItem('signoutTimestamp');
 

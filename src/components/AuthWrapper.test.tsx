@@ -163,4 +163,16 @@ describe('AuthWrapper', () => {
             mockUrl
         );
     });
+
+    test('skips test if playwright env is true', () => {
+        vi.stubEnv('VITE_PLAYWRIGHT_TEST', 'true');
+
+        render(
+            <AuthWrapper>
+                <></>
+            </AuthWrapper>
+        );
+
+        expect(Cache.getItem).not.toHaveBeenCalled();
+    });
 });

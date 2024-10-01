@@ -41,12 +41,12 @@ const App = (): JSX.Element => {
             }}
         >
             <AuthWrapper>
-                {!signoutTimestamp && (
+                {!signoutTimestamp && !import.meta.env.VITE_PLAYWRIGHT_TEST && (
                     <div className='w-[100vw] h-[100vh] flex justify-center items-center'>
                         <LoadingComponent message='Authenticating user ...' />
                     </div>
                 )}
-                {signoutTimestamp && (
+                {(signoutTimestamp || import.meta.env.VITE_PLAYWRIGHT_TEST) && (
                     <AppShell
                         header={{ height: 60 }}
                         navbar={{
