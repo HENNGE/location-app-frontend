@@ -4,6 +4,7 @@ import {
     mockCasvalUserLocation,
     mockCasvalUserLocationTwo,
     mockDepartments,
+    mockFetchedCasvalData,
     mockMembers,
 } from './mockData';
 
@@ -53,6 +54,31 @@ export const casvalMockResponse = http.post(
     }
 );
 
-const handlers = [kasvotMockResponse, casvalMockResponse];
+export const casvalMockResponseByFloor = http.post(
+    `${import.meta.env.VITE_CASVAL_URL}/location-info/:floor`,
+    async (info) => {
+        const { floor } = info.params;
+
+        return HttpResponse.json(
+            mockFetchedCasvalData.filter((fetchedData) =>
+                fetchedData.areaTag.name.includes(floor as string)
+            )
+        );
+    }
+);
+
+export const casvalMockErrorResponse = http.post(
+    `${import.meta.env.VITE_CASVAL_URL}/location-info/:floor`,
+    () => {
+        return HttpResponse.error();
+    }
+);
+
+const handlers = [
+    kasvotMockResponse,
+    casvalMockResponse,
+    casvalMockResponseByFloor,
+    casvalMockErrorResponse,
+];
 
 export const mswServer = setupServer(...handlers);

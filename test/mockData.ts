@@ -3,6 +3,7 @@ import {
     AreaTag,
     CasvalUser,
     CasvalUserLocation,
+    FetchedCasvalData,
 } from '../src/types/casval.types';
 import { KasvotDepartment, KasvotMember } from '../src/types/kasvot.types';
 
@@ -277,4 +278,190 @@ export const mockAreaTagTwo: AreaTag = {
 export const mockCasvalUsers: CasvalUser[] = [
     { id: mockMembers[0].id as string, email: mockMembers[0].email as string },
     { id: mockMembers[1].id as string, email: mockMembers[1].email as string },
+];
+
+export const mockFetchedCasvalData: FetchedCasvalData[] = [
+    // 2F Area Tags
+    {
+        users: [
+            { id: '1', email: 'user1@example.com' },
+            { id: '2', email: 'user2@example.com' },
+        ],
+        areaTag: {
+            id: 'area-1',
+            name: '2F-Cafe-BYOD-AP',
+            access_points: [
+                {
+                    id: 'ap-1',
+                    name: '2F-Cafe-BYOD-AP',
+                    mac_address: 'AA:BB:CC:DD:EE:01',
+                },
+                {
+                    id: 'ap-2',
+                    name: '2F-Cafe-AP-1',
+                    mac_address: 'AA:BB:CC:DD:EE:02',
+                },
+            ],
+        },
+    },
+    {
+        users: [
+            { id: '3', email: 'user3@example.com' },
+            { id: '4', email: 'user4@example.com' },
+        ],
+        areaTag: {
+            id: 'area-2',
+            name: '2F-Wide-Deck-AP-1',
+            access_points: [
+                {
+                    id: 'ap-3',
+                    name: '2F-Wide-Deck-AP-1',
+                    mac_address: 'AA:BB:CC:DD:EE:03',
+                },
+                {
+                    id: 'ap-4',
+                    name: '2F-Wide-Deck-AP-2',
+                    mac_address: 'AA:BB:CC:DD:EE:04',
+                },
+            ],
+        },
+    },
+
+    // 4F Area Tags
+    {
+        users: [
+            { id: '5', email: 'user5@example.com' },
+            { id: '6', email: 'user6@example.com' },
+        ],
+        areaTag: {
+            id: 'area-3',
+            name: '4F-Lounge-3',
+            access_points: [
+                {
+                    id: 'ap-5',
+                    name: '4F-Lounge-3',
+                    mac_address: 'AA:BB:CC:DD:EE:05',
+                },
+                {
+                    id: 'ap-6',
+                    name: '4F-Lounge-6',
+                    mac_address: 'AA:BB:CC:DD:EE:06',
+                },
+            ],
+        },
+    },
+    {
+        users: [
+            { id: '7', email: 'user7@example.com' },
+            { id: '8', email: 'user8@example.com' },
+        ],
+        areaTag: {
+            id: 'area-4',
+            name: '4F-Forest-Center',
+            access_points: [
+                {
+                    id: 'ap-7',
+                    name: '4F-Forest-Center',
+                    mac_address: 'AA:BB:CC:DD:EE:07',
+                },
+                {
+                    id: 'ap-8',
+                    name: '4F-Forest-Walkway-Center',
+                    mac_address: 'AA:BB:CC:DD:EE:08',
+                },
+            ],
+        },
+    },
+
+    // 5F Area Tags
+    {
+        users: [
+            { id: '9', email: 'user9@example.com' },
+            { id: '10', email: 'user10@example.com' },
+        ],
+        areaTag: {
+            id: 'area-5',
+            name: '5F-Collaboration-NorthWest',
+            access_points: [
+                {
+                    id: 'ap-9',
+                    name: '5F (NorthWest)',
+                    mac_address: 'AA:BB:CC:DD:EE:09',
+                },
+                {
+                    id: 'ap-10',
+                    name: '5F (North)',
+                    mac_address: 'AA:BB:CC:DD:EE:10',
+                },
+            ],
+        },
+    },
+    {
+        users: [
+            { id: '11', email: 'user11@example.com' },
+            { id: '12', email: 'user12@example.com' },
+        ],
+        areaTag: {
+            id: 'area-6',
+            name: '5F-Meeting-Rooms',
+            access_points: [
+                {
+                    id: 'ap-11',
+                    name: '5F-Meeting-Rooms',
+                    mac_address: 'AA:BB:CC:DD:EE:11',
+                },
+                {
+                    id: 'ap-12',
+                    name: '5F-Web-Meeting-Area',
+                    mac_address: 'AA:BB:CC:DD:EE:12',
+                },
+            ],
+        },
+    },
+
+    // 11F Area Tags
+    {
+        users: [
+            { id: '13', email: 'user13@example.com' },
+            { id: '14', email: 'user14@example.com' },
+        ],
+        areaTag: {
+            id: 'area-7',
+            name: '11F Guest Meeting Rooms',
+            access_points: [
+                {
+                    id: 'ap-13',
+                    name: '11F Guest Meeting Rooms',
+                    mac_address: 'AA:BB:CC:DD:EE:13',
+                },
+                {
+                    id: 'ap-14',
+                    name: '11F Guest Meeting Rooms',
+                    mac_address: 'AA:BB:CC:DD:EE:14',
+                },
+            ],
+        },
+    },
+    {
+        users: [
+            { id: '15', email: 'user15@example.com' },
+            { id: '16', email: 'user16@example.com' },
+        ],
+        areaTag: {
+            id: 'area-8',
+            name: '11F Open Lounge',
+            access_points: [
+                {
+                    id: 'ap-15',
+                    name: '11F Open Lounge',
+                    mac_address: 'AA:BB:CC:DD:EE:15',
+                },
+                {
+                    id: 'ap-16',
+                    name: '11F Open Lounge',
+                    mac_address: 'AA:BB:CC:DD:EE:16',
+                },
+            ],
+        },
+    },
 ];

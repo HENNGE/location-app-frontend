@@ -28,7 +28,7 @@ const SecondFloorPage = (): JSX.Element => {
     if (error) {
         return <ErrorPage />;
     }
-    console.log(111, data);
+
     return (
         <div className='flex justify-center items-center'>
             <LocationDrawer

@@ -14,6 +14,8 @@ export default defineConfig({
                 '**/*.config.{js,ts}',
                 '**/*.eslintrc.cjs',
                 '**/main.tsx',
+                '**/*.test.ts',
+                '**/*.test.tsx',
             ],
         },
         exclude: ['e2e/**'],
