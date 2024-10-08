@@ -4,11 +4,10 @@ import {
     screen,
     waitForElementToBeRemoved,
 } from '@testing-library/react';
-import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { useTimeoutState } from './hooks';
 
-const TestComponent = ({ initialValue }) => {
+const TestComponent = ({ initialValue }: { initialValue: string }) => {
     const value = useTimeoutState(initialValue);
     return <div>{value}</div>;
 };
