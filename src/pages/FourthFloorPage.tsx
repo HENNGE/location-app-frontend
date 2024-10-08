@@ -28,7 +28,8 @@ const FourthFloorPage = (): JSX.Element => {
     if (error) {
         return <ErrorPage />;
     }
-
+    console.log(111, kasvotMembers);
+    console.log(222, data);
     return (
         <div className='flex justify-center items-center'>
             <LocationDrawer

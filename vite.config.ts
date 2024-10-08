@@ -16,6 +16,7 @@ export default defineConfig({
                 '**/main.tsx',
                 '**/*.test.ts',
                 '**/*.test.tsx',
+                '**/app.tsx',
             ],
         },
         exclude: ['e2e/**'],

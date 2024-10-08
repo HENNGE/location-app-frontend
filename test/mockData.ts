@@ -177,7 +177,7 @@ export const mockCasvalUserLocation: CasvalUserLocation = {
     area_tags: [
         { id: 'tag1', tenant_id: 'tenant1', name: 'Shibuya' },
         { id: 'tag2', tenant_id: 'tenant2', name: 'HQ' },
-        { id: 'tag2', tenant_id: 'tenant2', name: '4F Test Room' },
+        { id: 'tag2', tenant_id: 'tenant2', name: '4F-Forest-Center' },
     ],
     last_seen: DateTime.now().minus({ minutes: 5 }).toUTC().toISO(),
     recent: true,
@@ -335,7 +335,7 @@ export const mockFetchedCasvalData: FetchedCasvalData[] = [
         ],
         areaTag: {
             id: 'area-3',
-            name: '4F-Lounge-3',
+            name: '4F Lounge Walkway',
             access_points: [
                 {
                     id: 'ap-5',
@@ -351,10 +351,7 @@ export const mockFetchedCasvalData: FetchedCasvalData[] = [
         },
     },
     {
-        users: [
-            { id: '7', email: 'user7@example.com' },
-            { id: '8', email: 'user8@example.com' },
-        ],
+        users: [{ id: '7', email: 'member.one@example.com' }],
         areaTag: {
             id: 'area-4',
             name: '4F-Forest-Center',
