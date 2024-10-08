@@ -52,3 +52,14 @@ export const getCountIcon = (count: number) => {
         return;
     }
 };
+
+export const parseEmail = (email: string): string => {
+    const namePart = email.split('@')[0];
+
+    const [firstName, lastName] = namePart.split('.');
+
+    const capitalize = (name: string) =>
+        name.charAt(0).toUpperCase() + name.slice(1);
+
+    return `${capitalize(firstName)} ${capitalize(lastName)}`;
+};

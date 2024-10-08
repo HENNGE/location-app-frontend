@@ -11,18 +11,20 @@ import {
     Text,
 } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
-import { IconSearch, IconX } from '@tabler/icons-react';
+import { IconSearch, IconUsersGroup, IconX } from '@tabler/icons-react';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { CasvalUserLocation } from '../types/casval.types';
-import { KasvotMember } from '../types/kasvot.types';
+import { KasvotDepartment, KasvotMember } from '../types/kasvot.types';
 import { fetcher, kasvotFetcher } from '../utilities/utilities';
-import SearchModal from './SearchModal';
+import DepartmentSearchModal from './DepartmentSearchModal';
+import IndividualSearchModal from './IndividualSearchModal';
 
 const SearchBox = () => {
     const [value, setValue] = useState<string>('');
     const [debounced] = useDebouncedValue<string>(value, 250);
     const [queryMember, setQueryMember] = useState<string>('');
+    const [queryDepartment, setQueryDepartment] = useState<string>('');
 
     const { data: members, isLoading: isLoadingMembers } = useSWR<{
         member: KasvotMember[];
@@ -33,14 +35,14 @@ const SearchBox = () => {
         kasvotFetcher
     );
 
-    // const { data: departments, isLoading: isLoadingDepartments } = useSWR<{
-    //     department: KasvotDepartment[];
-    // }>(
-    //     debounced
-    //         ? `query{department(name: "${debounced.toLowerCase()}", active: "Y"){id name}}`
-    //         : '',
-    //     kasvotFetcher
-    // );
+    const { data: departments, isLoading: isLoadingDepartments } = useSWR<{
+        department: KasvotDepartment[];
+    }>(
+        debounced
+            ? `query{department(name: "${debounced.toLowerCase()}", active: "Y"){id name currentMembersAndChildrenEmails}}`
+            : '',
+        kasvotFetcher
+    );
 
     const { data: casvalLocation, isLoading: casvalLoading } = useSWR(
         queryMember ? ['/query-location', queryMember] : null,
@@ -49,17 +51,8 @@ const SearchBox = () => {
     );
 
     const optionsData = useMemo(() => {
-        // if (members && departments) {
-        //     const combinedData = [...members.member, ...departments.department];
-
-        //     return [
-        //         ...new Set(
-        //             combinedData.map((queryData) => queryData.name || '')
-        //         ),
-        //     ];
-        // }
-        if (members) {
-            const combinedData = [...members.member];
+        if (members && departments) {
+            const combinedData = [...members.member, ...departments.department];
 
             return [
                 ...new Set(
@@ -67,8 +60,7 @@ const SearchBox = () => {
                 ),
             ];
         }
-    }, [members]);
-
+    }, [members, departments]);
     const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({
         option,
     }) => {
@@ -76,13 +68,14 @@ const SearchBox = () => {
             (member) => member.name === option.value
         );
 
-        // const department = departments?.department.find(
-        //     (dept) => dept.name === option.value
-        // );
+        const department = departments?.department.find(
+            (dept) => dept.name === option.value
+        );
 
         if (member) {
             return (
                 <Group
+                    role='option'
                     gap='sm'
                     onClick={() => setQueryMember(member.email || '')}
                     className='w-full h-full'
@@ -101,19 +94,23 @@ const SearchBox = () => {
                     </div>
                 </Group>
             );
+        } else if (department) {
+            return (
+                <Group
+                    role='option'
+                    gap='sm'
+                    className='flex flex-row w-full h-full'
+                    onClick={() => setQueryDepartment(department.id || '')}
+                >
+                    <Avatar size={36} radius='xl'>
+                        <IconUsersGroup />
+                    </Avatar>
+                    <div className='flex max-w-64'>
+                        <Text size='sm'>{option.value}</Text>
+                    </div>
+                </Group>
+            );
         }
-        // else if (department) {
-        //     return (
-        //         <Group gap='sm' className='flex flex-row'>
-        //             <Avatar size={36} radius='xl'>
-        //                 <IconUsersGroup />
-        //             </Avatar>
-        //             <div className='flex max-w-64'>
-        //                 <Text size='sm'>{option.value}</Text>
-        //             </div>
-        //         </Group>
-        //     );
-        // }
     };
 
     const optionsFilter: OptionsFilter = useCallback(({ options, search }) => {
@@ -135,7 +132,7 @@ const SearchBox = () => {
                 value={value}
                 onChange={(value) => setValue(value)}
                 className='w-[22rem]'
-                placeholder='Search user ... '
+                placeholder='Search user or department ... '
                 leftSection={
                     <IconSearch
                         style={{ width: rem(16), height: rem(16) }}
@@ -143,14 +140,18 @@ const SearchBox = () => {
                     />
                 }
                 rightSection={
-                    isLoadingMembers || casvalLoading ? (
-                        // || isLoadingDepartments
+                    isLoadingMembers ||
+                    casvalLoading ||
+                    isLoadingDepartments ? (
                         <Loader size={18} />
                     ) : (
                         <ActionIcon
+                            name='Clear search'
+                            aria-label='Clear search'
                             onClick={() => {
                                 setValue('');
                                 setQueryMember('');
+                                setQueryDepartment('');
                             }}
                             className='bg-white text-gray-500 hover:bg-white hover:text-gray-500'
                         >
@@ -164,7 +165,7 @@ const SearchBox = () => {
                 visibleFrom='md'
             />
             {casvalLocation && (
-                <SearchModal
+                <IndividualSearchModal
                     member={
                         members &&
                         members.member.find(
@@ -177,6 +178,22 @@ const SearchBox = () => {
                         setValue('');
                     }}
                     casvalLocation={casvalLocation}
+                />
+            )}
+            {queryDepartment && (
+                <DepartmentSearchModal
+                    open={!!queryDepartment}
+                    handleClose={() => {
+                        setQueryDepartment('');
+                        setValue('');
+                    }}
+                    department={
+                        (departments &&
+                            departments.department.filter(
+                                (dept) => dept.id === queryDepartment
+                            )[0]) ||
+                        {}
+                    }
                 />
             )}
         </>

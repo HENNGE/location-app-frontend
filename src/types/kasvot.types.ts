@@ -20,5 +20,6 @@ export interface KasvotMember {
 
 export interface KasvotDepartment {
     id?: string;
-    name: string;
+    name?: string;
+    currentMembersAndChildrenEmails?: string[];
 }

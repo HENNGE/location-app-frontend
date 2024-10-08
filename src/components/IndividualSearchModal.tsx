@@ -12,7 +12,12 @@ interface Props {
     casvalLocation: CasvalUserLocation;
 }
 
-const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
+const IndividualSearchModal = ({
+    member,
+    open,
+    handleClose,
+    casvalLocation,
+}: Props) => {
     const timeDifference: Duration<true> = useMemo(() => {
         const parsedDate = DateTime.fromISO(casvalLocation.last_seen || '');
 
@@ -31,6 +36,7 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
             overlayProps={{
                 backgroundOpacity: 0.5,
                 blur: 5,
+                'aria-label': 'modal-backdrop',
             }}
             withCloseButton={false}
         >
@@ -62,7 +68,13 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
                                     color='#003366'
                                     onClick={() =>
                                         window.location.replace(
-                                            `/level-${casvalLocation.area_tags[2].name[0]}/${member.email}`
+                                            `/level-${
+                                                casvalLocation.area_tags[2]
+                                                    .name[0] === '1'
+                                                    ? '11'
+                                                    : casvalLocation
+                                                          .area_tags[2].name[0]
+                                            }/${member.email}`
                                         )
                                     }
                                 >
@@ -108,4 +120,4 @@ const SearchModal = ({ member, open, handleClose, casvalLocation }: Props) => {
     );
 };
 
-export default SearchModal;
+export default IndividualSearchModal;
